@@ -10,6 +10,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/Size.css" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -69,12 +70,14 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
+
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">Inicio</a>
                     @else
                         <a href="{{ url('/login') }}">  Inicio de Sesión</a>
                         <a href="{{ url('/register') }}">Registro</a>
                     @endif
+
                 </div>
             @endif
 
@@ -83,8 +86,8 @@
                     ICODER - Juegos Nacionales
                 </div>
 
+                <img src="images/icoder-logo.png" class="img-rounded" style="height: 250px; weight:250px;">
 
-                <img src="images/icoder-logo.png" class="img-rounded">
                 {{--<div class="links">--}}
                     {{--<a href="https://laravel.com/docs">Documentation</a>--}}
                     {{--<a href="https://laracasts.com">Laracasts</a>--}}
