@@ -85,7 +85,7 @@
                     ICODER - Juegos Nacionales
                 </div>
 
-                <img src="images/icoder-logo.png" class="img-rounded" style="height: 250px; weight:250px;">
+                <img src="images/icoder-logo-cool.png" class="img-rounded" style="height: 250px; weight:250px;">
 
             </div>
 
