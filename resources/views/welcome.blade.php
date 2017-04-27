@@ -75,7 +75,6 @@
                         <a href="{{ url('/home') }}">Inicio</a>
                     @else
                         <a href="{{ url('/login') }}">  Inicio de Sesión</a>
-                        <a href="{{ url('/register') }}">Registro</a>
                     @endif
 
                 </div>
