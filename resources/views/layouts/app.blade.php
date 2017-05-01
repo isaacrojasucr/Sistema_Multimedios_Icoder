@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top" style="height: 70px;">
             <div class="container">
                 <div class="navbar-header">
 
@@ -36,15 +36,37 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        ICODER
+
+                    <a class="navbar-brand" style="padding-top: 0px;" href="{{ url('/') }}">
+                        <img style="height: 70px;" src="images/icoder-logo-cool.png">
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <!-- Menu, hay que arreglar que este en una linea -->
+                        <div style="width: 750px;">
+                            <div class="dropdown" style="width: 100px; ">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Deporte
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                            <div style="width: 500px;">
+                                <a class="btn btn-default" type="button">Buscar</a>
+                                <a class="btn btn-default" type="button">Inscripción Individual</a>
+                                <a class="btn btn-default" type="button">Inscripción Excel</a>
+                                <a class="btn btn-default" type="button">Reporte</a>
+                            </div>
+                        </div>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -63,7 +85,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Salir
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
