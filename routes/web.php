@@ -25,3 +25,5 @@ Route::resource('edition/edition', 'edition\\editionController');
 Route::resource('sport/sport', 'sport\\sportController');
 Route::resource('category/category', 'category\\categoryController');
 Route::resource('proof/proof', 'proofController');
+Route::resource('person/person', 'person\\personController');
+Route::resource('inscription/inscription', 'inscription\\inscriptionController');
