@@ -22,88 +22,99 @@
     </script>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top" style="height: 70px;">
-            <div class="container">
-                <div class="navbar-header">
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top" style="height: 70px;">
+        <div class="container">
+            <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#app-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-                    <!-- Branding Image -->
+                <!-- Branding Image -->
 
-                    <a class="navbar-brand" style="padding-top: 0px;" href="{{ url('/') }}">
-                        <img style="height: 70px;" src="images/icoder-logo-cool.png">
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        <!-- Menu, hay que arreglar que este en una linea -->
-                        <div style="width: 750px;">
-                            <div class="dropdown" style="width: 100px; ">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Deporte
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </div>
-                            <div style="width: 500px;">
-                                <a class="btn btn-default" type="button">Buscar</a>
-                                <a class="btn btn-default" type="button">Inscripción Individual</a>
-                                <a class="btn btn-default" type="button">Inscripción Excel</a>
-                                <a class="btn btn-default" type="button">Reporte</a>
-                            </div>
-                        </div>
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Inicio de Sesión</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Salir
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+                <a class="navbar-brand" style="padding-top: 0px;" href="{{ url('/home') }}">
+                    <img style="height: 70px;" src="images/icoder-logo-cool.png">
+                </a>
             </div>
-        </nav>
 
-        @yield('content')
-    </div>
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
+                        <li><a href="{{ route('login') }}">Inicio de Sesión</a></li>
+                    @else
+                        <div style="margin-top: 10px; background: white;" >
+                            <ul class="nav navbar-nav">
+                                <!-- Menu, hay que arreglar que este en una linea -->
+
+                                <!-- Deportes-->
+                                <li class="dropdown" >
+
+                                    <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button"
+                                       aria-expanded="false">
+                                        Deportes <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#">Futbol</a></li>
+                                        <li><a href="#">Atletismo</a></li>
+                                        <li><a href="#">Natación</a></li>
+                                        <li><a href="#">Alterofilia</a></li>
+                                        <li><a href="#">Baloncesto</a></li>
+                                    </ul>
+
+                                </li>
+
+                                <li><a href="#">Inscripción Individual</a></li>
+
+                                <li><a href="#">Inscripción Excel</a></li>
+
+                                <li><a href="#">Reporte</a></li>
+
+                                <!-- Nombre del usuario-->
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-expanded="false">
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                Salir
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                  style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @yield('content')
+</div>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
