@@ -39,7 +39,7 @@
                 <!-- Branding Image -->
 
                 <a class="navbar-brand" style="padding-top: 0px;" href="{{ url('/home') }}">
-                    <img style="height: 70px;" src="images/icoder-logo-cool.png">
+                    <img style="height: 70px;" src="/images/icoder-logo-cool.png">
                 </a>
             </div>
 
