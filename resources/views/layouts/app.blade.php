@@ -75,7 +75,7 @@
 
                                 </li>
 
-                                <li><a href="#">Inscripción Individual</a></li>
+                                <li><a href="{{ url('inscription/inscription') }}">Inscripción Individual</a></li>
 
                                 <li><a href="#">Inscripción Excel</a></li>
 
