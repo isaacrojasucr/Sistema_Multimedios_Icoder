@@ -76,7 +76,7 @@ class inscriptionController extends Controller
     {
         $inscription = inscription::findOrFail($id);
 
-        return view('inscription.inscription.show', compact('inscription'));
+        return view('inscription.inscription.inscription', compact('inscription'));
     }
 
     /**
@@ -128,5 +128,8 @@ class inscriptionController extends Controller
         Session::flash('flash_message', 'inscription deleted!');
 
         return redirect('inscription/inscription');
+    }
+    public function incription(){
+        return view('inscription/inscription/inscription');
     }
 }

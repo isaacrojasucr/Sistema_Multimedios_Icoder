@@ -9,7 +9,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Inscription</div>
                     <div class="panel-body">
-                        <a href="{{ url('/inscription/inscription/create') }}" class="btn btn-success btn-sm" title="Add New inscription">
+                        <a href="{{ url('/inscription') }}" class="btn btn-success btn-sm" title="Add New inscription">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 

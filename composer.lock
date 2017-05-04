@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5955c94b99816a2d0bdf1ec98ecdbbd2",
+    "content-hash": "30e33171910359985616f24a7b55fb13",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1969,16 +1969,16 @@
     "packages-dev": [
         {
             "name": "appzcoder/crud-generator",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/appzcoder/crud-generator.git",
-                "reference": "9b35da4245934403eef0edcff6faa66de64fba2d"
+                "reference": "77c45c74fc4c52901d7fccc71b41100b14e8bde8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/appzcoder/crud-generator/zipball/9b35da4245934403eef0edcff6faa66de64fba2d",
-                "reference": "9b35da4245934403eef0edcff6faa66de64fba2d",
+                "url": "https://api.github.com/repos/appzcoder/crud-generator/zipball/77c45c74fc4c52901d7fccc71b41100b14e8bde8",
+                "reference": "77c45c74fc4c52901d7fccc71b41100b14e8bde8",
                 "shasum": ""
             },
             "require": {
@@ -2017,7 +2017,7 @@
                 "laravel",
                 "laravel crud generator"
             ],
-            "time": "2017-05-01T07:05:48+00:00"
+            "time": "2017-05-02T16:32:05+00:00"
         },
         {
             "name": "doctrine/instantiator",
