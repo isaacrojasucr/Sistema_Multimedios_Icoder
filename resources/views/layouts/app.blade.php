@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,7 +40,7 @@
                 <!-- Branding Image -->
 
                 <a class="navbar-brand" style="padding-top: 0px;" href="{{ url('/home') }}">
-                    <img style="height: 70px;" src="/images/icoder-logo-cool.png">
+                    <img style="height: 70px;" src="https://hji3wg-bn1305.files.1drv.com/y4pYVqKLMdYq5piF7azPF_z7oHQINd90FRwA7WltPrdd_WkkrxO4ofEGHegxHKOqFNNqfodPsAZREzHDi3UxN1Nj73soufFTnt_8_ln5ezzvB0A_1uZvigCxCm--I3GR7CpuCGuRYXMhTOkZxs-Y2VLeOqSpdFivAR6ks3rxCbSaowtseXnoM1U4FZz_CDi1HA6-xdZclqC-zsuF6z721AeEQ/icoder-logo-cool.png?psid=1">
                 </a>
             </div>
 

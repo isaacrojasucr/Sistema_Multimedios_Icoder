@@ -20,6 +20,7 @@ class CreateInscriptionsTable extends Migration
             $table->string('inscription');
             $table->string('pase_cantonal');
             $table->integer('edition');
+            $table->integer('stade');
             $table->timestamps();
 
             $table->foreign('sport')->references('id')->on('sports')->onDelete('cascade')->onUpdate('cascade');

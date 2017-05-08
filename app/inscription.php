@@ -25,7 +25,7 @@ class inscription extends Model
      *
      * @var array
      */
-    protected $fillable = ['sport', 'category', 'proof', 'inscription', 'pase_cantonal', 'edition'];
+    protected $fillable = ['sport', 'category', 'proof', 'inscription', 'pase_cantonal', 'edition', 'stade'];
 
     
 }
