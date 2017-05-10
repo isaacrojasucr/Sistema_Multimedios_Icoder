@@ -42,6 +42,7 @@
                 <a class="navbar-brand" style="padding-top: 0px;" href="{{ url('/home') }}">
                     <img style="height: 70px;" src="https://hji3wg-bn1305.files.1drv.com/y4pYVqKLMdYq5piF7azPF_z7oHQINd90FRwA7WltPrdd_WkkrxO4ofEGHegxHKOqFNNqfodPsAZREzHDi3UxN1Nj73soufFTnt_8_ln5ezzvB0A_1uZvigCxCm--I3GR7CpuCGuRYXMhTOkZxs-Y2VLeOqSpdFivAR6ks3rxCbSaowtseXnoM1U4FZz_CDi1HA6-xdZclqC-zsuF6z721AeEQ/icoder-logo-cool.png?psid=1">
                 </a>
+                
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
