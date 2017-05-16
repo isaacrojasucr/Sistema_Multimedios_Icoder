@@ -95,6 +95,7 @@
         {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('id_card_front') ? 'has-error' : ''}}">
+    +3
     {!! Form::label('id_card_front', 'Id Card Front', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::text('id_card_front', null, ['class' => 'form-control']) !!}
