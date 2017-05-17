@@ -25,7 +25,7 @@ class CreateInscriptionsTable extends Migration
 
             $table->foreign('sport')->references('id')->on('sports')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('category')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('proof')->references('id')->on('challenges')->onDelete('cascade')->onUpdate('cascade');
+           // $table->foreign('proof')->references('id')->on('challenges')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
