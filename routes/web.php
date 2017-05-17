@@ -28,3 +28,5 @@ Route::resource('proof/proof', 'proofController');
 Route::resource('person/person', 'person\\personController');
 Route::resource('inscription/inscription', 'inscription\\inscriptionController');
 
+
+Route::resource('challenge/challenge', 'challenge\\challengeController');
