@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label>Nombre Deporte</label>
+    <label>Nombre del Deporte</label>
     <input type="hidden" id="sport" value=""/>
 </div>
 

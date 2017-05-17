@@ -28,7 +28,7 @@
 
                             <ul class="nav nav-tabs" id="tabs" data-tabs="tabs" style="text-align: center">
                                 <li class="active"><a href="#personal" data-toggle="tab">Datos Personales</a></li>
-                                <li><a href="#atlete" data-toggle="tab">Informacion de atleta</a></li>
+                                <li><a href="#atlete" data-toggle="tab">Información de atleta</a></li>
                                 <li><a href="#settings" data-toggle="tab">Pruebas</a></li>
                             </ul>
                             <div class="tab-content">
