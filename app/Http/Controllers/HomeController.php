@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\sport;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $info = sport::all();
+
+
+        return view('home', compact('info'));
     }
 
 }

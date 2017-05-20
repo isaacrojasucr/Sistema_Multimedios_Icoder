@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\inscription;
 
+use App\category;
+use App\challenge;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -11,6 +13,12 @@ use Session;
 
 class inscriptionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,9 +49,19 @@ class inscriptionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function creation ($id,$name)
     {
-        return view('inscription.inscription.create');
+        $categories = category::where('sport_id','=',$id)->get();
+
+        $challenges = array();
+        foreach ($categories as $category) {
+            $temp = challenge::where('cat_id','=',$category->id);
+            $challenges = array_add($challenges,''.$category->id.'',$temp);
+        }
+
+
+
+        return view('inscription.inscription.create', compact('categories','id', 'name', 'challenges'));
     }
 
     /**
@@ -65,6 +83,12 @@ class inscriptionController extends Controller
         return redirect('inscription/inscription');
     }
 
+
+    public function save (Request $request){
+        Session::flash('flash_message', 'inscription added!');
+
+        return redirect('inscription/inscription');
+    }
     /**
      * Display the specified resource.
      *
