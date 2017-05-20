@@ -16,7 +16,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu" style="margin-left: 37.5%;  text-align: center" >
                                 @foreach($info as $data)
-                                    <li><a href="#{{$data->id}}">{{$data->name}}</a></li>
+                                    <li><a href="{{route('inscription/create',['id'=>$data->id, 'name'=>$data->name])}}">{{$data->name}}</a></li>
                                 @endforeach
 
                             </ul>

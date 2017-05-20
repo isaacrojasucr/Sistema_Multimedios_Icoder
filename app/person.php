@@ -25,7 +25,7 @@ class person extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'middlename', 'lastname', 'id_card', 'mail', 'phone', 'height', 'width', 'blood', 'country', 'birthday', 'state', 'town', 'address', 'role', 'image', 'id_card_front', 'id_card_back'];
+    protected $fillable = ['name', 'middlename', 'lastname','gender', 'id_card', 'mail', 'phone', 'height', 'width', 'blood', 'country', 'birthday', 'state', 'town', 'address', 'role', 'image', 'id_card_front', 'id_card_back'];
 
     
 }

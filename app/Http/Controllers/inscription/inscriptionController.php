@@ -4,6 +4,7 @@ namespace App\Http\Controllers\inscription;
 
 use App\category;
 use App\challenge;
+use App\edition;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -55,13 +56,24 @@ class inscriptionController extends Controller
 
         $challenges = array();
         foreach ($categories as $category) {
-            $temp = challenge::where('cat_id','=',$category->id);
-            $challenges = array_add($challenges,''.$category->id.'',$temp);
+            $temp = challenge::where('cat_id','=',$category->id)->get();
+
+            $challenge =  array();
+            foreach ($temp as $i) {
+                $challenge =  array_add($challenge,$i->id . '', $i->name );
+           }
+            $challenges = array_add($challenges,''.$category->id.'',$challenge);
         }
 
+        $category = array();
+        foreach ($categories as $cat){
+            $category = array_add($category,$cat->id,'Sub.'.$cat->year );
+        }
+        
+        $edition = edition::all();
 
 
-        return view('inscription.inscription.create', compact('categories','id', 'name', 'challenges'));
+        return view('inscription.inscription.create', compact('category','id', 'name', 'challenges', 'edition'));
     }
 
     /**

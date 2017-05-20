@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading"> Nueva inscripción / Deporte "nombre"</div>
+                    <div class="panel-heading"> Nueva inscripción / Deporte: {{$name}}</div>
                     <div class="panel-body">
                         <a href="{{ url('/inscription/inscription') }}" title="Back">
                             <button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left"
@@ -160,13 +160,13 @@
 
                                 <div class="form-horizontal">
                                     <div class="form-group">
-                                        <input type="hidden" id="sport" value=""/>
+                                        {{ Form::hidden('sport', $id , array('id' => 'sport')) }}
                                     </div>
 
                                     <div class="form-group {{ $errors->has('category') ? 'has-error' : ''}}">
                                         {!! Form::label('branch', 'Rama', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::select('categori', ['1'=>'Infantil','2'=>'Juvenil' ], null,['class' => 'form-control']) !!}
+                                            {!! Form::select('gender', ['1'=>'Masculino','2'=>'Femenino'], null,['class' => 'form-control']) !!}
                                             {!! $errors->first('category', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
@@ -174,16 +174,19 @@
                                     <div class="form-group {{ $errors->has('category') ? 'has-error' : ''}}">
                                         {!! Form::label('category', 'Categoria', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::select('categori', ['1'=>'Infantil','2'=>'Juvenil' ], null,['class' => 'form-control']) !!}
+                                            {!! Form::select('category', $category, null,['class' => 'form-control']) !!}
                                             {!! $errors->first('category', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
 
                                     <div class="form-group {{ $errors->has('proof') ? 'has-error' : ''}}">
-                                        {!! Form::label('proof', 'Prueba', ['class' => 'col-md-4 control-label']) !!}
+                                        {!! Form::label('proof', 'Pruebas', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::select('proof', ['1'=>'100 mts','2'=>'200 mts', '3'=>'400 mts' ], null,['class' => 'form-control']) !!}
-                                            {!! $errors->first('proof', '<p class="help-block">:message</p>') !!}
+                                            {{ Form::hidden('1', $var = 1 , array('id' => '1')) }}
+                                            @foreach($challenges as $challenge)
+                                                {!! Form::select('proof'.$var, $challenge, null,['class' => 'form-control']) !!}
+                                                {{ Form::hidden('1', $var = $var+1 , array('id' => '1')) }}
+                                            @endforeach
                                         </div>
                                     </div>
 
@@ -196,7 +199,11 @@
                                     </div>
 
                                     <div>
-                                        <input type="hidden" id="edition" value=""/>
+                                        @foreach($edition as $ed)
+                                            @if($ed->enable == 1)
+                                                {{ Form::hidden('edition', $ed->id , array('id' => 'edition')) }}
+                                            @endif
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

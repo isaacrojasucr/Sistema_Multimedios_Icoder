@@ -33,6 +33,6 @@ Route::resource('person/person', 'person\\personController');
 
 Route::resource('inscription/inscription', 'inscription\\inscriptionController');
 Route::post('inscription/save', ['as'=>'inscription/save', 'uses'=>'inscription\\inscriptionController@save']);
-Route::get('inscription/create/{id},{name}',['as'=>'inscription/create', 'uses'=>'inscription\\inscriptionController@creation'] );
+Route::get('inscription/create/{id}/{name}',['as'=>'inscription/create', 'uses'=>'inscription\\inscriptionController@creation'] );
 
 Route::resource('challenge/challenge', 'challenge\\challengeController');
