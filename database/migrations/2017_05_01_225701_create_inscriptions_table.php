@@ -20,11 +20,12 @@ class CreateInscriptionsTable extends Migration
             $table->string('inscription');
             $table->string('pase_cantonal');
             $table->integer('edition');
+            $table->integer('stade');
             $table->timestamps();
 
             $table->foreign('sport')->references('id')->on('sports')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('category')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('proof')->references('id')->on('proofs')->onDelete('cascade')->onUpdate('cascade');
+           // $table->foreign('proof')->references('id')->on('challenges')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

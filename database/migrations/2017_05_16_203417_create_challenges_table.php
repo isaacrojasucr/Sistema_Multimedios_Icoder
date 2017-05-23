@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateProofsTable extends Migration
+class CreateChallengesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,13 @@ class CreateProofsTable extends Migration
      */
     public function up()
     {
-        Schema::create('proofs', function(Blueprint $table) {
+        Schema::create('challenges', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('enable');
             $table->integer('cat_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('cat_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
-            //$table->foreign('cat_id')->references('id')->on('categories');
         });
     }
 
@@ -31,6 +29,6 @@ class CreateProofsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('proofs');
+        Schema::drop('challenges');
     }
 }

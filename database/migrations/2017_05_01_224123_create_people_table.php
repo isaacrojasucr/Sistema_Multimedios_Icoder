@@ -17,6 +17,7 @@ class CreatePeopleTable extends Migration
             $table->string('name');
             $table->string('middlename');
             $table->string('lastname');
+            $table->string('gender');
             $table->integer('id_card');
             $table->string('mail');
             $table->string('phone');

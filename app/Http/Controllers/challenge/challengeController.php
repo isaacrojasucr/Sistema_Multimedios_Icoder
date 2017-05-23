@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\challenge;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\proof;
+use App\challenge;
 use Illuminate\Http\Request;
 use Session;
 
-class proofController extends Controller
+class challengeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,16 +22,14 @@ class proofController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $proof = proof::where('name', 'LIKE', "%$keyword%")
-				->orWhere('enable', 'LIKE', "%$keyword%")
+            $challenge = challenge::where('name', 'LIKE', "%$keyword%")
 				->orWhere('cat_id', 'LIKE', "%$keyword%")
-				
-                ->paginate($perPage);
+				->paginate($perPage);
         } else {
-            $proof = proof::paginate($perPage);
+            $challenge = challenge::paginate($perPage);
         }
 
-        return view('proof--controller-namespace=proof.proof.index', compact('proof'));
+        return view('challenge.challenge.index', compact('challenge'));
     }
 
     /**
@@ -41,7 +39,7 @@ class proofController extends Controller
      */
     public function create()
     {
-        return view('proof--controller-namespace=proof.proof.create');
+        return view('challenge.challenge.create');
     }
 
     /**
@@ -56,11 +54,11 @@ class proofController extends Controller
         
         $requestData = $request->all();
         
-        proof::create($requestData);
+        challenge::create($requestData);
 
-        Session::flash('flash_message', 'proof added!');
+        Session::flash('flash_message', 'challenge added!');
 
-        return redirect('proof/proof');
+        return redirect('challenge/challenge');
     }
 
     /**
@@ -72,9 +70,9 @@ class proofController extends Controller
      */
     public function show($id)
     {
-        $proof = proof::findOrFail($id);
+        $challenge = challenge::findOrFail($id);
 
-        return view('proof--controller-namespace=proof.proof.show', compact('proof'));
+        return view('challenge.challenge.show', compact('challenge'));
     }
 
     /**
@@ -86,9 +84,9 @@ class proofController extends Controller
      */
     public function edit($id)
     {
-        $proof = proof::findOrFail($id);
+        $challenge = challenge::findOrFail($id);
 
-        return view('proof--controller-namespace=proof.proof.edit', compact('proof'));
+        return view('challenge.challenge.edit', compact('challenge'));
     }
 
     /**
@@ -104,12 +102,12 @@ class proofController extends Controller
         
         $requestData = $request->all();
         
-        $proof = proof::findOrFail($id);
-        $proof->update($requestData);
+        $challenge = challenge::findOrFail($id);
+        $challenge->update($requestData);
 
-        Session::flash('flash_message', 'proof updated!');
+        Session::flash('flash_message', 'challenge updated!');
 
-        return redirect('proof/proof');
+        return redirect('challenge/challenge');
     }
 
     /**
@@ -121,10 +119,10 @@ class proofController extends Controller
      */
     public function destroy($id)
     {
-        proof::destroy($id);
+        challenge::destroy($id);
 
-        Session::flash('flash_message', 'proof deleted!');
+        Session::flash('flash_message', 'challenge deleted!');
 
-        return redirect('proof/proof');
+        return redirect('challenge/challenge');
     }
 }

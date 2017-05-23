@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class proof extends Model
+class challenge extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'proofs';
+    protected $table = 'challenges';
 
     /**
     * The database primary key value.
@@ -25,7 +25,7 @@ class proof extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'enable', 'cat_id'];
+    protected $fillable = ['name', 'cat_id'];
 
     
 }

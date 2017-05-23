@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\inscription;
 
+use App\category;
+use App\challenge;
+use App\edition;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -11,6 +14,12 @@ use Session;
 
 class inscriptionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,9 +50,30 @@ class inscriptionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function creation ($id,$name)
     {
-        return view('inscription.inscription.create');
+        $categories = category::where('sport_id','=',$id)->get();
+
+        $challenges = array();
+        foreach ($categories as $category) {
+            $temp = challenge::where('cat_id','=',$category->id)->get();
+
+            $challenge =  array();
+            foreach ($temp as $i) {
+                $challenge =  array_add($challenge,$i->id . '', $i->name );
+           }
+            $challenges = array_add($challenges,''.$category->id.'',$challenge);
+        }
+
+        $category = array();
+        foreach ($categories as $cat){
+            $category = array_add($category,$cat->id,'Sub.'.$cat->year );
+        }
+        
+        $edition = edition::all();
+
+
+        return view('inscription.inscription.create', compact('category','id', 'name', 'challenges', 'edition'));
     }
 
     /**
@@ -65,6 +95,12 @@ class inscriptionController extends Controller
         return redirect('inscription/inscription');
     }
 
+
+    public function save (Request $request){
+        Session::flash('flash_message', 'inscription added!');
+
+        return redirect('inscription/inscription');
+    }
     /**
      * Display the specified resource.
      *
@@ -76,7 +112,7 @@ class inscriptionController extends Controller
     {
         $inscription = inscription::findOrFail($id);
 
-        return view('inscription.inscription.inscription', compact('inscription'));
+        return view('inscription.inscription.show', compact('inscription'));
     }
 
     /**
@@ -128,8 +164,5 @@ class inscriptionController extends Controller
         Session::flash('flash_message', 'inscription deleted!');
 
         return redirect('inscription/inscription');
-    }
-    public function incription(){
-        return view('inscription/inscription/inscription');
     }
 }

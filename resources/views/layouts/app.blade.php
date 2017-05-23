@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -23,7 +22,7 @@
         ]) !!};
     </script>
 </head>
-<body>
+<body >
 <div id="app">
     <nav class="navbar navbar-default navbar-static-top" style="height: 70px;">
         <div class="container">
@@ -41,8 +40,10 @@
                 <!-- Branding Image -->
 
                 <a class="navbar-brand" style="padding-top: 0px;" href="{{ url('/home') }}">
-                    <img style="height: 70px;" src="/images/icoder-logo-cool.png">
+                    <img style="height: 70px;"
+                         src="https://dl-web.dropbox.com/get/icoder-logo-cool.png?_download_id=258358141996956950887799695293445345049889602583589584701410945888&_notify_domain=www.dropbox.com&_subject_uid=179078261&dl=1&w=AADel-R7izMsc2Lhn-FZ357epZ9JCe8tYIUl4u6EEGlTYQ">
                 </a>
+
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -55,33 +56,34 @@
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Inicio de Sesión</a></li>
                     @else
-                        <div style="margin-top: 10px; background: white;" >
+                        <div style="margin-top: 10px; background: white;">
                             <ul class="nav navbar-nav">
                                 <!-- Menu, hay que arreglar que este en una linea -->
 
-                                <!-- Deportes-->
-                                <li class="dropdown" >
+                                    <!-- Deportes-->
+                                    <li class="dropdown" id="option1">
 
-                                    <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button"
-                                       aria-expanded="false">
-                                        Deportes <span class="caret"></span>
-                                    </a>
+                                        <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button"
+                                           aria-expanded="false">
+                                            Deportes <span class="caret"></span>
+                                        </a>
 
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#">Futbol</a></li>
-                                        <li><a href="#">Atletismo</a></li>
-                                        <li><a href="#">Natación</a></li>
-                                        <li><a href="#">Alterofilia</a></li>
-                                        <li><a href="#">Baloncesto</a></li>
-                                    </ul>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="#">Futbol</a></li>
+                                            <li><a href="#">Atletismo</a></li>
+                                            <li><a href="#">Natación</a></li>
+                                            <li><a href="#">Alterofilia</a></li>
+                                            <li><a href="#">Baloncesto</a></li>
+                                        </ul>
 
-                                </li>
+                                    </li>
 
-                                <li><a href="{{ url('inscription/inscription') }}">Inscripción Individual</a></li>
+                                    <li id="option2"><a href="{{ url('inscription/inscription/create') }}">Inscripción Individual</a></li>
 
-                                <li><a href="#">Inscripción Excel</a></li>
+                                    <li id="option3"><a href="#">Inscripción Excel</a></li>
 
-                                <li><a href="#">Reporte</a></li>
+                                    <li id="option4"><a href="#">Reporte</a></li>
+
 
                                 <!-- Nombre del usuario-->
                                 <li class="dropdown">

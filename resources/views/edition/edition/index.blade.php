@@ -57,7 +57,7 @@
                                                         'type' => 'submit',
                                                         'class' => 'btn btn-danger btn-xs',
                                                         'title' => 'Delete edition',
-                                                        'onclick'=>'return confirm("Confirm delete?")'
+                                                        'onclick'=>'return confirm("¿Seguro que desea eliminar esta edición?")'
                                                 )) !!}
                                             {!! Form::close() !!}
                                         </td>
