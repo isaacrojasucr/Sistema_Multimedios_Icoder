@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>ICODER - Juegos Nacionales</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -70,22 +70,20 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-
                     @if (Auth::check())
                         <a href="{{ url('/home') }}">Inicio</a>
                     @else
                         <a href="{{ url('/login') }}">  Inicio de Sesión</a>
                     @endif
-
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    ICODER - Juegos Nacionales
+            <div class="content" style="background-image:url('images/fondo.png')">
+                <div class="title m-b-md" style="color: white;">
+                    Sistema de Inscripciones para los Juegos Nacionales
                 </div>
 
-                <img src="images/icoder-logo-cool.png" class="img-rounded" style="height: 250px; weight:250px;">
+                <img src="images/icoder-logo-cool.png" class="img-rounded" style="height: 250px; weight:250px; margin-bottom: 15px; background-color: white">
 
             </div>
 

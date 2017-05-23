@@ -22,8 +22,8 @@
         ]) !!};
     </script>
 </head>
-<body >
-<div id="app">
+<body>
+<div id="app" >
     <nav class="navbar navbar-default navbar-static-top" style="height: 70px;">
         <div class="container">
             <div class="navbar-header">
@@ -58,31 +58,30 @@
                     @else
                         <div style="margin-top: 10px; background: white;">
                             <ul class="nav navbar-nav">
-                                <!-- Menu, hay que arreglar que este en una linea -->
+                                <!-- Deportes-->
+                                <li class="dropdown" id="option1">
 
-                                    <!-- Deportes-->
-                                    <li class="dropdown" id="option1">
+                                    <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button"
+                                       aria-expanded="false">
+                                        Deportes <span class="caret"></span>
+                                    </a>
 
-                                        <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button"
-                                           aria-expanded="false">
-                                            Deportes <span class="caret"></span>
-                                        </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#">Futbol</a></li>
+                                        <li><a href="#">Atletismo</a></li>
+                                        <li><a href="#">Natación</a></li>
+                                        <li><a href="#">Alterofilia</a></li>
+                                        <li><a href="#">Baloncesto</a></li>
+                                    </ul>
 
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="#">Futbol</a></li>
-                                            <li><a href="#">Atletismo</a></li>
-                                            <li><a href="#">Natación</a></li>
-                                            <li><a href="#">Alterofilia</a></li>
-                                            <li><a href="#">Baloncesto</a></li>
-                                        </ul>
+                                </li>
 
-                                    </li>
+                                <li id="option2"><a href="{{ url('inscription/inscription/create') }}">Inscripción
+                                        Individual</a></li>
 
-                                    <li id="option2"><a href="{{ url('inscription/inscription/create') }}">Inscripción Individual</a></li>
+                                <li id="option3"><a href="#">Inscripción Excel</a></li>
 
-                                    <li id="option3"><a href="#">Inscripción Excel</a></li>
-
-                                    <li id="option4"><a href="#">Reporte</a></li>
+                                <li id="option4"><a href="#">Reporte</a></li>
 
 
                                 <!-- Nombre del usuario-->
