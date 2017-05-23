@@ -41,7 +41,7 @@
 
                 <a class="navbar-brand" style="padding-top: 0px;" href="{{ url('/home') }}">
                     <img style="height: 70px;"
-                         src="https://dl-web.dropbox.com/get/icoder-logo-cool.png?_download_id=258358141996956950887799695293445345049889602583589584701410945888&_notify_domain=www.dropbox.com&_subject_uid=179078261&dl=1&w=AADel-R7izMsc2Lhn-FZ357epZ9JCe8tYIUl4u6EEGlTYQ">
+                         src="/images/icoder-logo-cool.png">
                 </a>
 
             </div>
