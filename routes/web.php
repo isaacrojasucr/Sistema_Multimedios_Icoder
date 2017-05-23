@@ -19,16 +19,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-
 Route::resource('states/states', 'States\\statesController');
+
 Route::resource('town/town', 'town\\townController');
+
 Route::resource('edition/edition', 'edition\\editionController');
+
 Route::resource('sport/sport', 'sport\\sportController');
+
 Route::resource('category/category', 'category\\categoryController');
-Route::resource('proof/proof', 'proofController');
+
 Route::resource('person/person', 'person\\personController');
+
 Route::resource('inscription/inscription', 'inscription\\inscriptionController');
+Route::post('inscription/save', ['as'=>'inscription/save', 'uses'=>'inscription\\inscriptionController@save']);
+Route::get('inscription/create/{id}/{name}',['as'=>'inscription/create', 'uses'=>'inscription\\inscriptionController@creation'] );
 
-Route::get('inscription','inscription\\inscriptionController@incription');
-
-
+Route::resource('challenge/challenge', 'challenge\\challengeController');
