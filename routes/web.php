@@ -36,3 +36,5 @@ Route::post('inscription/save', ['as'=>'inscription/save', 'uses'=>'inscription\
 Route::get('inscription/create/{id}/{name}',['as'=>'inscription/create', 'uses'=>'inscription\\inscriptionController@creation'] );
 
 Route::resource('challenge/challenge', 'challenge\\challengeController');
+
+Route::resource('inscription/inscriptionfile', 'inscription\\inscriptionfileController');
