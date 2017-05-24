@@ -77,6 +77,30 @@
                                             {!! $errors->first('birthday', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
+
+
+                                    <div class="form-group">
+
+                                        {!! Form::label('address', 'Dirección de Residencia', ['class' => 'col-md-7 control-label']) !!}
+
+                                    </div>
+
+
+                                    <div class="form-group {{ $errors->has('address') ? 'has-error' : ''}}">
+                                        {!! Form::label('address', 'Canton', ['class' => 'col-md-4 control-label']) !!}
+                                        <div class="col-md-6">
+                                            {!! Form::text('city', null, ['class' => 'form-control']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group {{ $errors->has('address') ? 'has-error' : ''}}">
+                                        {!! Form::label('address', 'Provincia', ['class' => 'col-md-4 control-label']) !!}
+                                        <div class="col-md-6">
+                                            {!! Form::text('province', null, ['class' => 'form-control']) !!}
+                                            {!! $errors->first('address', '<p class="help-block">:message</p>') !!}
+                                        </div>
+                                    </div>
+
                                     <div class="form-group {{ $errors->has('address') ? 'has-error' : ''}}">
                                         {!! Form::label('address', 'Otras Señas', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
@@ -163,6 +187,13 @@
                                         {{ Form::hidden('sport', $id , array('id' => 'sport')) }}
                                     </div>
 
+                                    <div class="form-group">
+                                        {!! Form::label('branch', 'Tipo de usuario', ['class' => 'col-md-4 control-label']) !!}
+                                        <div class="col-md-6">
+                                            {!! Form::select('role', ['1'=>'Atleta','2'=>'Acompañante', '3'=>'Medico/Preparador'], null,['class' => 'form-control']) !!}
+                                        </div>
+                                    </div>
+
                                     <div class="form-group {{ $errors->has('category') ? 'has-error' : ''}}">
                                         {!! Form::label('branch', 'Rama', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
@@ -204,6 +235,8 @@
                                                 {{ Form::hidden('edition', $ed->id , array('id' => 'edition')) }}
                                             @endif
                                         @endforeach
+
+                                        {{Form::hidden('town', Auth::user()->town_id ,array('id'=>'town'))}}
                                     </div>
                                 </div>
                             </div>

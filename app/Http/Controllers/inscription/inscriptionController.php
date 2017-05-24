@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\inscription;
+use App\person;
 use Illuminate\Http\Request;
 use Session;
 
@@ -97,6 +98,40 @@ class inscriptionController extends Controller
 
 
     public function save (Request $request){
+        $person =  new person();
+        $person->name = $request-> name;
+        $person->middlename = $request->middlename;
+        $person->lastname = $request->lastname;
+        $person->gender = $request->gender;
+        $person->id_card = $request->id_card;
+        $person->mail = $request->mail;
+        $person->phone = $request->phone;
+        $person->height = $request->height;
+        $person->width = $request->width;
+        $person->blood = $request->blood;
+        $person->country = $request->country;
+        $person->birthday = $request->birthday;
+        $person->town = $request->town;
+        $person->address = $request->address;
+        $person->role= $request->role;
+
+        $id_card = $person->id_card;
+
+        $person->image = $id_card;
+        $person->id_card_front = $id_card.'_f';
+        $person->id_card_back = $id_card.'_b';
+        $person->city = $request->city;
+        $person->province = $request->province;
+
+        $id = $request->file('image')->storePubliclyAs('',$id_card);
+        $id_f = $request->file('id_card_front')->storePubliclyAs('',$id_card.'_f');
+        $id_b = $request->file('id_card_back')->storePubliclyAs('',$id_card.'_b');
+        
+        
+            
+        $incription = new inscription();
+
+
         Session::flash('flash_message', 'inscription added!');
 
         return redirect('inscription/inscription');

@@ -26,17 +26,17 @@ class CreatePeopleTable extends Migration
             $table->integer('blood');
             $table->string('country');
             $table->date('birthday');
-            $table->integer('state')->unsigned();
             $table->integer('town')->unsigned();
             $table->string('address');
             $table->integer('role');
             $table->string('image');
             $table->string('id_card_front');
             $table->string('id_card_back');
+            $table->string('city');
+            $table->string('province');
             $table->timestamps();
 
             $table->foreign('town')->references('id')->on('towns')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('state')->references('id')->on('states')->onDelete('cascade')->onUpdate('cascade');
 
 
         });
