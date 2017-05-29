@@ -117,20 +117,40 @@ class inscriptionController extends Controller
 
         $id_card = $person->id_card;
 
-        $person->image = $id_card;
-        $person->id_card_front = $id_card.'_f';
-        $person->id_card_back = $id_card.'_b';
+        if (!empty($request->file('image'))){
+            $person->image = $id_card;
+            $id = $request->file('image')->storePubliclyAs('',$id_card);
+        }
+
+        if (!empty($request->file('id_card_front'))){
+            $person->id_card_front = $id_card.'_f';
+            $id_f = $request->file('id_card_front')->storePubliclyAs('',$id_card.'_f');
+        }
+
+        if (!empty($request->file('id_card_back'))){
+            $person->id_card_back = $id_card.'_b';
+            $id_b = $request->file('id_card_back')->storePubliclyAs('',$id_card.'_b');
+        }
+
+
+
+
         $person->city = $request->city;
         $person->province = $request->province;
 
-        $id = $request->file('image')->storePubliclyAs('',$id_card);
-        $id_f = $request->file('id_card_front')->storePubliclyAs('',$id_card.'_f');
-        $id_b = $request->file('id_card_back')->storePubliclyAs('',$id_card.'_b');
-        
-        
-            
-        $incription = new inscription();
 
+
+        $inscription = new inscription();
+        $inscription->sport =  $request->sport;
+        $inscription->category = $request->category;
+        $inscription->edition = $request->edition;
+        $inscription->state = 1;
+
+
+        if (!empty($request->file('pase_cantonal'))){
+            $inscription->pase_cantonal = $id_card.'pc';
+            $pase_cantonal = $request->file('pase_cantonal');
+        }
 
         Session::flash('flash_message', 'inscription added!');
 
