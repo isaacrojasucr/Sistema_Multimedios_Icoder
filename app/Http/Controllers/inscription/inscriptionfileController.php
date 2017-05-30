@@ -20,6 +20,7 @@ class inscriptionfileController extends Controller
 
 
 
+        $datos = new array();
     Excel::load(Input::file('customer'),function ($reader){
 
         $reader->each(function ($sheet){
