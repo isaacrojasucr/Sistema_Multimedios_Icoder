@@ -25,7 +25,7 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['route' => 'inscription/save', 'method' => 'post']) !!}
+                        {!! Form::open(['route' => 'inscription/save', 'method' => 'post', 'files'=>true]) !!}
                         <ul class="nav nav-tabs" id="tabs" data-tabs="tabs" style="text-align: center">
                             <li class="active"><a href="#personal" data-toggle="tab">Datos Personales</a></li>
                             <li><a href="#atlete" data-toggle="tab">Información de atleta</a></li>
@@ -57,10 +57,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group {{ $errors->has('id_card') ? 'has-error' : ''}}">
-                                        {!! Form::label('id_card', 'Cédula', ['class' => 'col-md-4 control-label']) !!}
+                                        {!! Form::label('Cédula', 'Cédula', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
                                             {!! Form::number('id_card', null, ['class' => 'form-control']) !!}
-                                            {!! $errors->first('id_card', '<p class="help-block">:message</p>') !!}
+                                            {!! $errors->first('Cédula', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
                                     <div class="form-group {{ $errors->has('country') ? 'has-error' : ''}}">
@@ -139,9 +139,9 @@
                                     </div>
 
                                     <div class="form-group {{ $errors->has('mail') ? 'has-error' : ''}}">
-                                        {!! Form::label('mail', 'Correo', ['class' => 'col-md-4 control-label']) !!}
+                                        {!! Form::label('Correo', 'Correo', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::text('mail', null, ['class' => 'form-control']) !!}
+                                            {!! Form::email('mail', null, ['class' => 'form-control']) !!}
                                             {!! $errors->first('mail', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
@@ -154,17 +154,16 @@
                                     </div>
 
                                     <div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
-                                        {!! Form::label('image', 'Foto', ['class' => 'col-md-4 control-label']) !!}
+                                        {!! Form::label('Foto', 'Foto', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::file('image', null, ['class' => 'form-control']) !!}
-                                            {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
+                                            {!! Form::file('image', ['class' => 'form-control border-input']) !!}
                                         </div>
                                     </div>
 
                                     <div class="form-group {{ $errors->has('id_card_front') ? 'has-error' : ''}}">
                                         {!! Form::label('id_card_front', 'Frente de Cédula', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::file('id_card_front', null, ['class' => 'form-control']) !!}
+                                            {!! Form::file('id_card_front', ['class' => 'form-control']) !!}
                                             {!! $errors->first('id_card_front', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
@@ -172,7 +171,7 @@
                                     <div class="form-group {{ $errors->has('id_card_back') ? 'has-error' : ''}}">
                                         {!! Form::label('id_card_back', 'Reverso de Cédula', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::file('id_card_back', null, ['class' => 'form-control']) !!}
+                                            {!! Form::file('id_card_back',['class' => 'form-control']) !!}
                                             {!! $errors->first('id_card_back', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
@@ -213,19 +212,23 @@
                                     <div class="form-group {{ $errors->has('proof') ? 'has-error' : ''}}">
                                         {!! Form::label('proof', 'Pruebas', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {{ Form::hidden('1', $var = 1 , array('id' => '1')) }}
-                                            @foreach($challenges as $challenge)
-                                                {!! Form::select('proof'.$var, $challenge, null,['class' => 'form-control']) !!}
-                                                {{ Form::hidden('1', $var = $var+1 , array('id' => '1')) }}
-                                            @endforeach
+                                            {!! Form::select('proof', $challenges, null,['class' => 'form-control']) !!}
+
                                         </div>
                                     </div>
 
                                     <div class="form-group {{ $errors->has('pase_cantonal') ? 'has-error' : ''}}">
                                         {!! Form::label('pase_cantonal', 'Pase Cantonal', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::file('pase_cantonal', null, ['class' => 'form-control']) !!}
+                                            {!! Form::file('pase_cantonal', ['class' => 'form-control']) !!}
                                             {!! $errors->first('pase_cantonal', '<p class="help-block">:message</p>') !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {!! Form::label('boleta', 'Boleta de inscripción', ['class' => 'col-md-4 control-label']) !!}
+                                        <div class="col-md-6">
+                                            {!! Form::file('inscription', ['class' => 'form-control']) !!}
                                         </div>
                                     </div>
 
