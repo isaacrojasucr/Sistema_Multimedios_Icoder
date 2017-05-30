@@ -12,6 +12,7 @@ use App\inscription;
 use App\person;
 use Illuminate\Http\Request;
 use Session;
+use Exception;
 
 class inscriptionController extends Controller
 {
@@ -62,8 +63,9 @@ class inscriptionController extends Controller
             $challenge =  array();
             foreach ($temp as $i) {
                 $challenge =  array_add($challenge,$i->id . '', $i->name );
-           }
-            $challenges = array_add($challenges,''.$category->id.'',$challenge);
+            }
+            $challenges = $challenge;
+
         }
 
         $category = array();
@@ -98,6 +100,7 @@ class inscriptionController extends Controller
 
 
     public function save (Request $request){
+
         $person =  new person();
         $person->name = $request-> name;
         $person->middlename = $request->middlename;
@@ -115,28 +118,34 @@ class inscriptionController extends Controller
         $person->address = $request->address;
         $person->role= $request->role;
 
-        $id_card = $person->id_card;
+        $id_card = $request->id_card;
 
         if (!empty($request->file('image'))){
-            $person->image = $id_card;
-            $id = $request->file('image')->storePubliclyAs('',$id_card);
+            $person->image = $request->file('image')->store(''.$id_card);
+        }else{
+            $person->image =  '';
         }
 
         if (!empty($request->file('id_card_front'))){
-            $person->id_card_front = $id_card.'_f';
-            $id_f = $request->file('id_card_front')->storePubliclyAs('',$id_card.'_f');
+
+            $id_f = $request->file('id_card_front')->store($id_card.'');
+            $person->id_card_front = $id_f;
+        }else{
+            $person->id_card_front =  '';
         }
 
         if (!empty($request->file('id_card_back'))){
-            $person->id_card_back = $id_card.'_b';
-            $id_b = $request->file('id_card_back')->storePubliclyAs('',$id_card.'_b');
+            $id_b = $request->file('id_card_back')->store($id_card.'');
+            $person->id_card_back = $id_b;
+        }else{
+            $person->id_card_back =  '';
         }
-
-
-
 
         $person->city = $request->city;
         $person->province = $request->province;
+        $person->save();
+
+
 
 
 
@@ -144,13 +153,25 @@ class inscriptionController extends Controller
         $inscription->sport =  $request->sport;
         $inscription->category = $request->category;
         $inscription->edition = $request->edition;
-        $inscription->state = 1;
+        $inscription->stade = 1;
+        $inscription->proof = $request->proof;
 
 
         if (!empty($request->file('pase_cantonal'))){
-            $inscription->pase_cantonal = $id_card.'pc';
-            $pase_cantonal = $request->file('pase_cantonal');
+            $inscription->pase_cantonal = $request->file('pase_cantonal')->store($id_card.'');
+        }else{
+            $inscription->pase_cantonal = '';
         }
+
+        if (!empty($request->file('inscription'))){
+            $inscription->inscription = $request->file('inscription')->store($id_card.'');
+        }else{
+            $inscription->inscription = '';
+        }
+
+        $inscription->save();
+
+
 
         Session::flash('flash_message', 'inscription added!');
 
