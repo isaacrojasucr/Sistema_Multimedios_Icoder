@@ -2,19 +2,71 @@
 
 namespace App\Http\Controllers\inscription;
 
-use App\User;
+use App\person;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Input;
+use DB;
+use Excel;
 
 class inscriptionfileController extends Controller
 {
+
+    public function getImport(){
+        return view('inscription.inscription.uploadFile');
+    }
+
+    public function postImport(){
+
+
+
+    Excel::load(Input::file('customer'),function ($reader){
+
+        $reader->each(function ($sheet){
+            $personemails=person::where("mail","=",$sheet->mail)->first();
+            if(count( $personemails)==0) {
+                person::create($sheet->toArray());
+            }
+        });
+
+    });
+
+    return back();
+
+}
+
+    public function postImport2(){
+
+
+
+        Excel::load(Input::file('customer'),function ($reader){
+
+            $reader->each(function ($sheet){
+                if (empty($sheet->name)) {
+
+                }
+                else {
+                    person::firstOrCreate($sheet->toArray());
+                }
+            });
+
+        });
+
+        return back();
+
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { return view('inscription.inscription.inscriptionfile');
+    {
+        $personas= person::paginate(25);
+
+
+        return view('inscription.inscription.inscriptionfile')->with("personas", $personas );
+
     }
 
     /**
@@ -82,38 +134,24 @@ class inscriptionfileController extends Controller
     {
         //
     }
-
-    public function uploadFile(Request $request)
+    public function listado_usuarios()
     {
-        $archivo = $request->file('archivo');
-        $nombre_original=$archivo->getClientOriginalName();
-        $extension=$archivo->getClientOriginalExtension();
-        $r1=Storage::disk('archivos')->put($nombre_original,  \File::get($archivo) );
-        $ruta  =  storage_path('archivos') ."/". $nombre_original;
-
-if($r1){
-
-            Excel::selectSheetsByIndex(0)->load($ruta, function($hoja) {
-
-                $hoja->each(function($fila) {
-
-                        $usuario=new User();
-                        $usuario->nombres= $fila->nombres;
-                        echo nombres;
-                        $usuario->apellidos= $fila->apellidos;
-                        $usuario->email= $fila->email;
-                        $usuario->ciudad= $fila->ciudad;
 
 
 
 
-                });
+        $personas= person::paginate(25);
 
-            });
+        return view('listados.listado_usuarios')->with("personas", $personas );
 
 
-        }
+
+
 
 
     }
+
+
+
+
 }

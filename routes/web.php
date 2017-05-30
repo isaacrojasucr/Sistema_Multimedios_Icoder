@@ -37,4 +37,9 @@ Route::get('inscription/create/{id}/{name}',['as'=>'inscription/create', 'uses'=
 
 Route::resource('challenge/challenge', 'challenge\\challengeController');
 
-Route::resource('inscription/inscriptionfile', 'inscription\\inscriptionfileController');
+Route::resource('inscriptionfile', 'inscription\\inscriptionfileController');
+
+
+Route::get('/getImport', 'inscription\\inscriptionfileController@getImport');
+Route::post('/postImport', 'inscription\\inscriptionfileController@postImport');
+Route::get('/editar_usuario/{id}', 'person\\personController@edit');

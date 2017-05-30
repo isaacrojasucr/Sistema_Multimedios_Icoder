@@ -79,7 +79,7 @@
                                 <li id="option2"><a href="{{ url('inscription/inscription/create') }}">Inscripción
                                         Individual</a></li>
 
-                                <li id="option3"><a href="#">Inscripción Excel</a></li>
+                                <li id="option3"><a href="{{ url('inscriptionfile') }}">Inscripción Excel</a></li>
 
                                 <li id="option4"><a href="#">Reporte</a></li>
 
@@ -115,9 +115,12 @@
     </nav>
 
     @yield('content')
+
+
 </div>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/inscription.js') }}"></script>
 </body>
 </html>
