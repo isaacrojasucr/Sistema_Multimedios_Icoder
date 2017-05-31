@@ -13,7 +13,7 @@
 </div><div class="form-group {{ $errors->has('branch') ? 'has-error' : ''}}">
     {!! Form::label('branch', 'Rama', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('branch', ['M', 'F'], null, ['class' => 'form-control']) !!}
+        {!! Form::select('branch', ['M'=>'Masculino','F'=>'Femenino'], null, ['class' => 'form-control']) !!}
         {!! $errors->first('branch', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('sport_id') ? 'has-error' : ''}}">

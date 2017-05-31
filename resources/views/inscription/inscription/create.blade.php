@@ -196,7 +196,7 @@
                                     <div class="form-group {{ $errors->has('category') ? 'has-error' : ''}}">
                                         {!! Form::label('branch', 'Rama', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
-                                            {!! Form::select('gender', ['1'=>'Masculino','2'=>'Femenino'], null,['class' => 'form-control']) !!}
+                                            {!! Form::select('gender', ['M'=>'Masculino','F'=>'Femenino'], null,['class' => 'form-control']) !!}
                                             {!! $errors->first('category', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>

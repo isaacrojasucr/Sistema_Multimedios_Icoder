@@ -58,6 +58,28 @@
                     @else
                         <div style="margin-top: 10px; background: white;">
                             <ul class="nav navbar-nav">
+
+
+
+                                <li class="dropdown" id="">
+
+                                    <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button"
+                                       aria-expanded="false">
+                                        Mantenimientos <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li id=""><a href="{{ url('edition/edition') }}">Edición</a></li>
+                                        <li id=" "><a href="{{ url('sport/sport') }}">Deporte</a></li>
+                                        <li id=""><a href="{{ url('category/category') }}">Categorias</a></li>
+                                        <li id=""><a href="{{ url('challenge/challenge') }}">Pruebas</a></li>
+                                        <li id=""><a href="{{ url('states/states') }}">Provincias</a></li>
+                                        <li id=""><a href="{{ url('town/town') }}">Cantones</a></li>
+
+                                    </ul>
+
+                                </li>
+
                                 <!-- Deportes-->
                                 <li class="dropdown" id="option1">
 
