@@ -7,9 +7,9 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit challenge #{{ $challenge->id }}</div>
+                    <div class="panel-heading">Editar Prueba #{{ $challenge->id }}</div>
                     <div class="panel-body">
-                        <a href="{{ url('/challenge/challenge') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/challenge/challenge') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
                         <br />
                         <br />
 
@@ -28,7 +28,7 @@
                             'files' => true
                         ]) !!}
 
-                        @include ('challenge.challenge.form', ['submitButtonText' => 'Update'])
+                        @include ('challenge.challenge.form', ['submitButtonText' => 'Actualizar'])
 
                         {!! Form::close() !!}
 
