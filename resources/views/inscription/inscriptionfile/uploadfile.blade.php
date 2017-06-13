@@ -20,12 +20,12 @@
 
                 <div class="form-group col-xs-12"  >
                     <label>Agregar Archivo de Excel </label>
-                    <input type="file" name="customer">
+                    <input type="file" name="file">
                 </div>
 
 
                 <div class="box-footer">
-                    <button type="submit"  class="btn btn-primary">Cargar Datos</button>
+                    <button  type="submit" class="btn btn-primary">Cargar Datos</button>
                 </div>
 
 

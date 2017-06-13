@@ -41,5 +41,8 @@ Route::resource('inscriptionfile', 'inscription\\inscriptionfileController');
 
 
 Route::get('/getImport', 'inscription\\inscriptionfileController@getImport');
-Route::post('/postImport', 'inscription\\inscriptionfileController@postImport');
-Route::get('/editar_usuario/{id}', 'person\\personController@edit');
+
+Route::post('postImport', ['as'=>'postImport', 'uses'=>'inscription\\inscriptionfileController@postImport']);
+
+Route::get('/inscriptionfile/{id}', ['as'=>'/inscriptionfile', 'uses'=>'inscription\\inscriptionfileController@edit' ]);
+Route::get('/listado', 'inscription\\inscriptionfileController@listado');

@@ -7,14 +7,15 @@
     <div class="box-body">
         <?php
 
-        if( count($personas) >0){
+
+        if( count($personas) >0  ){
         ?>
 
         <table id="tabla_usuarios" class="table-responsive" cellspacing="0" width="100%">
 
             <thead>
             <tr>
-                <th style="width:10px">Id</th>
+
                 <th>Nombres</th>
                 <th>MN</th>
                 <th>Apellido</th>
@@ -36,10 +37,11 @@
             <?php
 
             foreach($personas as $persona){
+                if ( is_object ($persona )){
             ?>
 
             <tr role="row" class="odd">
-                <td class="sorting_1"><?= $persona->id; ?></td>
+
                 <td><?= $persona->name;  ?></td>
                 <td><?= $persona->middlename;  ?></td>
                 <td><?= $persona->lastname;  ?></td>
@@ -50,13 +52,16 @@
 
 
                 <td>
-                    <a href="{{ url('/inscription/inscription/' . $persona->id) }}" title="View inscription"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button></a>
-                    <a href="{{ url('/inscription/inscription/' . $persona->id . '/edit') }}" title="Edit inscription"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button></a>
+
+                <button class="btn  btn-skin-green btn-xs" onclick="mostrarficha(<?= $persona->id; ?>);" ><i class="fa fa-fw fa-eye"></i>Ver</button>
+                <a href="{{ url('/inscriptionfile/' . $persona->id) }}" title="Edit inscription"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button></a>
+                <a href="" title="Delete inscription"><button class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Eliminar</button></a>
+
                     {!! Form::open([
-                        'method'=>'DELETE',
-                        'url' => ['/inscription/inscription', $persona->id],
-                        'style' => 'display:inline'
-                    ]) !!}
+                         'method'=>'edit',
+                         'url' => ['/inscriptionfile/', $persona->id],
+                         'style' => 'display:inline'
+                     ]) !!}
                     {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar', array(
                             'type' => 'submit',
                             'class' => 'btn btn-danger btn-xs',
@@ -68,7 +73,7 @@
             </tr>
 
             <?php
-            }
+            }}
             ?>
 
 
@@ -81,7 +86,7 @@
         <?php
 
 
-        echo str_replace('/?', '?', $personas->render() )  ;
+
 
         }
         else

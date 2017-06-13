@@ -138,7 +138,21 @@
 
     @yield('content')
 
+    <section>
+        <div id="capa_modal" class="div_modal" ></div>
+        <div id="capa_para_edicion" class="div_contenido" > </div>
+    </section>
+    <div class="container">
+        <div class="row">
 
+            <div class="panel-heading">Inscription</div>
+            <div class="col-md-10">
+                <section class="content"  id="contenido_principal">
+
+                </section>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Scripts -->
