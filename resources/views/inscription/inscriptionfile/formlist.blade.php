@@ -53,22 +53,9 @@
 
                 <td>
 
-                <button class="btn  btn-skin-green btn-xs" onclick="mostrarficha(<?= $persona->id; ?>);" ><i class="fa fa-fw fa-eye"></i>Ver</button>
-                <a href="{{ url('/inscriptionfile/' . $persona->id) }}" title="Edit inscription"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button></a>
-                <a href="" title="Delete inscription"><button class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Eliminar</button></a>
+                <button class="btn btn-primary btn-xs" onclick="mostrarficha(<?= $persona->id; ?>);" ><i class="fa fa-fw fa-eye"></i>Editar</button>
+                 <button class="btn btn-danger btn-xs" onclick="eliminarficha(<?= $persona->id; ?>);" ><i class="fa fa-fw fa-eye"></i>Eliminar</button>
 
-                    {!! Form::open([
-                         'method'=>'edit',
-                         'url' => ['/inscriptionfile/', $persona->id],
-                         'style' => 'display:inline'
-                     ]) !!}
-                    {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar', array(
-                            'type' => 'submit',
-                            'class' => 'btn btn-danger btn-xs',
-                            'title' => 'Delete inscription',
-                            'onclick'=>'return confirm("Confirm delete?")'
-                    )) !!}
-                    {!! Form::close() !!}
                 </td>
             </tr>
 

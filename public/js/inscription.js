@@ -1,6 +1,6 @@
 
 function cargarformulario(arg){
-//funcion que carga todos los formularios del sistema
+
 
     if(arg==1){ var url = "getImport"; }
     if(arg==2){ var url = "getImport/";
@@ -17,7 +17,7 @@ function cargarformulario(arg){
 
 function cargarlistado(){
 
-    //funcion para cargar los diferentes  en general
+
 
     var url = "listado";
 
@@ -41,12 +41,28 @@ function cargarlistado(){
 function mostrarficha(id_usuario) {
 
     $("#capa_modal").show();
-
-    var url = "/inscriptionfile/" + id_usuario;
+    $("#capa_para_edicion").show();
+    var url = "inscriptionfile/"+id_usuario+"/edit";
 
     $.get(url,function(resul){
         $("#capa_para_edicion").html(resul);
     })
 
 }
+
+
+
+function eliminarficha(id_usuario) {
+
+
+    var url = "inscriptionfile/"+id_usuario+"/delete";
+
+    $.get(url,function(resul){
+
+        $("#contenido_principal").html(resul);
+    })
+
+
+}
+
 

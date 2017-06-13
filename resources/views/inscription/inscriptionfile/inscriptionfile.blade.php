@@ -4,12 +4,11 @@
     <div class="container">
         <div class="row">
 
-            <div class="panel-heading">Inscription</div>
+                <div class="panel-heading">Inscription</div>
             <div class="col-md-10">
                 <ul class="nav nav-pills">
-                    <li id="carga" role="presentation"class="active"><a href="javascript:void(0);" onclick="cargarformulario(2);" ><i class="fa fa-circle-o"></i>Cargar Datos Us. </a></li>
+                    <li id="carga" role="presentation"class="active"><a href="javascript:void(0);" onclick="cargarformulario(2);" ><i class="fa fa-circle-o"></i>Cargar Archivo</a></li>
                     <li id="listado" role="presentation" ><a href="javascript:void(0);" onclick="cargarlistado();" ><i class="fa fa-circle-o"></i>Listado Usuarios</a></li>
-                    <li role="presentation"><a href="javascript:void(0);" onclick="cargarlistado(1,1);" ><i class="fa fa-circle-o"></i>Listado Usuarios</a></li>
 
                     <li class="active"></li>
 
@@ -19,4 +18,5 @@
             </div>
         </div>
     </div>
+
 @endsection

@@ -44,5 +44,8 @@ Route::get('/getImport', 'inscription\\inscriptionfileController@getImport');
 
 Route::post('postImport', ['as'=>'postImport', 'uses'=>'inscription\\inscriptionfileController@postImport']);
 
-Route::get('/inscriptionfile/{id}', ['as'=>'/inscriptionfile', 'uses'=>'inscription\\inscriptionfileController@edit' ]);
+Route::get('inscriptionfile/{id}/edit', 'inscription\\inscriptionfileController@edit' );
+Route::get('inscriptionfile/{id}/delete', 'inscription\\inscriptionfileController@delete' );
 Route::get('/listado', 'inscription\\inscriptionfileController@listado');
+
+Route::post('editar', 'inscription\\inscriptionfileController@editar');

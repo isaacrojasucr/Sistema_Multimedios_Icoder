@@ -90,6 +90,38 @@ class inscriptionfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function editar(Request $request)
+    {
+        $val  = $request->session()->get('persona');
+        $data=$request->all();
+        $id = $data["id_usuario"];
+        foreach ( $val as $p ){
+
+            if($p->id == $id )
+            {
+                $p=$p;
+                $p->name  =  $data["nombres"];
+                $p->lastname=$data["apellido"];
+            }
+        }
+        $request->session()->forget('persona');
+
+        $request-> session()->put('persona', $val);
+
+        if(true){
+
+           // Session::flash('flash_message','Datos actualizados Correctamente');
+            return back();
+
+        }
+        else
+        {
+            Session::flash('flash_message','hubo un error vuelva a intentarlo');
+            return back();
+        }
+    }
+
     public function create()
     {
 
@@ -123,20 +155,49 @@ class inscriptionfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        session_start();
 
-        foreach ( $_SESSION['personas'] as $p){
+       $val  = $request->session()->get('persona');
+
+        foreach ( $val as $p){
             if($p->id == $id)
             {
-                $usuario=$p;
+                $usuario= $p;
             }
         }
 
-        return view('inscription.inscriptionfile.editIF')->with("usuario", $usuario );
+       // print dd($usuario);
+      return view('inscription.inscriptionfile.editIF')->with("usuario", $usuario );
 
     }
+
+    public function delete(Request $request,$id)
+    {
+
+        $val  = $request->session()->get('persona');
+        $usuario = collect();
+        foreach ( $val as $p){
+            if($p->id == $id && !empty($p->name))
+            {
+
+
+            }else {
+                $usuario-> push($p);
+            }
+
+        }
+
+        $request->session()->forget('persona');
+
+        $request-> session()->put('persona', $usuario);
+
+
+        return view('inscription.inscriptionfile.formlist')->with("personas", $usuario );
+
+    }
+
+
 
     /**
      * Update the specified resource in storage.
