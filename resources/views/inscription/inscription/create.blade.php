@@ -35,6 +35,19 @@
                             <div class="tab-pane active" id="personal">
                                 <br/>
                                 <div class="form-horizontal">
+                                    <div class="form-group {{ $errors->has('id_card') ? 'has-error' : ''}}">
+                                        {!! Form::label('Cédula', 'Cédula', ['class' => 'col-md-4 control-label']) !!}
+                                        <div class="col-md-3">
+                                            {!! Form::number('id_card', null, ['class' => 'form-control']) !!}
+                                            {!! $errors->first('Cédula', '<p class="help-block">:message</p>') !!}
+                                        </div>
+                                        <div class="col-md-3">
+                                             <div class="form-group" style="text-align: center">
+                                                  <button class="btn btn-primary" onclick="">Buscar</button>
+                                             </div>
+                                        </div> 
+                                    </div>                                    
+                                                                       
                                     <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                                         {!! Form::label('name', 'Nombre', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
@@ -55,14 +68,7 @@
                                             {!! Form::text('lastname', null, ['class' => 'form-control']) !!}
                                             {!! $errors->first('lastname', '<p class="help-block">:message</p>') !!}
                                         </div>
-                                    </div>
-                                    <div class="form-group {{ $errors->has('id_card') ? 'has-error' : ''}}">
-                                        {!! Form::label('Cédula', 'Cédula', ['class' => 'col-md-4 control-label']) !!}
-                                        <div class="col-md-6">
-                                            {!! Form::number('id_card', null, ['class' => 'form-control']) !!}
-                                            {!! $errors->first('Cédula', '<p class="help-block">:message</p>') !!}
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="form-group {{ $errors->has('country') ? 'has-error' : ''}}">
                                         {!! Form::label('country', 'País', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
