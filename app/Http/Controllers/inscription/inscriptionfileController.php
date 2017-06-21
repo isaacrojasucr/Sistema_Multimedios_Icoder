@@ -135,7 +135,12 @@ class inscriptionfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+    }
+    public function guardar(Request $request)
+    {
+        $request->session()->forget('persona');
+        echo "Se guardo todito";
     }
 
     /**

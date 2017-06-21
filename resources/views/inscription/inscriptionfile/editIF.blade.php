@@ -13,7 +13,7 @@
             <div id="notificacion_resul_feu"></div>
 
 
-            editar_usuario
+
             <form  id="f_editar_usuario"  method="post"  action="editar" class="form-horizontal form_entrada" >
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <input type="hidden" name="id_usuario" value="<?= $usuario->id; ?>">

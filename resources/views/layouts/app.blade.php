@@ -102,7 +102,7 @@
                                         Individual</a></li>
 
                                 <li id="option3"><a href="{{ url('inscriptionfile') }}">Inscripción Excel</a></li>
-
+                                <li id="option3"><a href="{{ url('padroncargar') }}">Cargar Padron</a></li>
                                 <li id="option4"><a href="#">Reporte</a></li>
 
 
@@ -145,7 +145,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="panel-heading">Inscription</div>
+            <div class="panel-heading"></div>
             <div class="col-md-10">
                 <section class="content"  id="contenido_principal">
 

@@ -69,7 +69,9 @@
         </table>
 
 
-
+            <div class="box-footer " style="text-align: center">
+                <button  onclick="guargarDatos()" class="btn btn-primary">Guardar Datos</button>
+            </div>
         <?php
 
 
@@ -88,6 +90,8 @@
         }
 
         ?>
+
+
     </div>
 
 </div>

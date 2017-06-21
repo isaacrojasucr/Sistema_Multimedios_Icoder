@@ -34,10 +34,6 @@ function cargarlistado(){
 
 
 
-
-
-
-
 function mostrarficha(id_usuario) {
 
     $("#capa_modal").show();
@@ -64,5 +60,19 @@ function eliminarficha(id_usuario) {
 
 
 }
+function guargarDatos() {
+
+
+    var url = "guardar";
+
+    $.get(url,function(resul){
+
+        $("#contenido_principal").html(resul);
+    })
+
+
+}
+
+
 
 

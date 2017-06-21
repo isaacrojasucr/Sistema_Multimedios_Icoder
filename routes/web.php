@@ -37,6 +37,14 @@ Route::get('inscription/create/{id}/{name}',['as'=>'inscription/create', 'uses'=
 
 Route::resource('challenge/challenge', 'challenge\\challengeController');
 
+
+
+Route::resource('padroncargar', 'padronController');
+Route::post('postImportPadron', ['as'=>'postImportPadron', 'uses'=>'padronController@postImportPadron']);
+
+
+
+
 Route::resource('inscriptionfile', 'inscription\\inscriptionfileController');
 
 
@@ -49,3 +57,7 @@ Route::get('inscriptionfile/{id}/delete', 'inscription\\inscriptionfileControlle
 Route::get('/listado', 'inscription\\inscriptionfileController@listado');
 
 Route::post('editar', 'inscription\\inscriptionfileController@editar');
+
+Route::get('guardar', 'inscription\\inscriptionfileController@guardar');
+
+
