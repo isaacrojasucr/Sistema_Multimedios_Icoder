@@ -78,7 +78,7 @@
                 </div>
             @endif
 
-            <div class="content" style="background-image:url('images/fondo.png')">
+            <div class="content" style="background-color: #c0c0c0;">
                 <div class="title m-b-md" style="color: white;">
                     Sistema de Inscripciones para los Juegos Nacionales
                 </div>
