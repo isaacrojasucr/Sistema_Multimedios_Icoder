@@ -17,6 +17,7 @@ class CreateInscriptionsTable extends Migration
             $table->integer('sport')->unsigned();
             $table->integer('category')->unsigned();
             $table->integer('proof')->unsigned();
+            $table->integer('person')->unsigned();
             $table->string('inscription');
             $table->string('pase_cantonal');
             $table->integer('edition');

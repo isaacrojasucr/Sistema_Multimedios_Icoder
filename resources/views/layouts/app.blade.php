@@ -81,29 +81,11 @@
                                 </li>
 
                                 <!-- Deportes-->
-                                <li class="dropdown" id="option1">
 
-                                    <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button"
-                                       aria-expanded="false">
-                                        Deportes <span class="caret"></span>
-                                    </a>
-
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#">Futbol</a></li>
-                                        <li><a href="#">Atletismo</a></li>
-                                        <li><a href="#">Natación</a></li>
-                                        <li><a href="#">Alterofilia</a></li>
-                                        <li><a href="#">Baloncesto</a></li>
-                                    </ul>
-
-                                </li>
-
-                                <li id="option2"><a href="{{ url('inscription/inscription/create') }}">Inscripción
-                                        Individual</a></li>
 
                                 <li id="option3"><a href="{{ url('inscriptionfile') }}">Inscripción Excel</a></li>
                                 <li id="option3"><a href="{{ url('padroncargar') }}">Cargar Padron</a></li>
-                                <li id="option4"><a href="#">Reporte</a></li>
+
 
 
                                 <!-- Nombre del usuario-->

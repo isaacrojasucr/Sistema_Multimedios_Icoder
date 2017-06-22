@@ -7,7 +7,7 @@ use App\challenge;
 use App\edition;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 use App\inscription;
 use App\person;
 use Illuminate\Http\Request;
@@ -32,19 +32,27 @@ class inscriptionController extends Controller
         $keyword = $request->get('search');
         $perPage = 25;
 
+        $user = app()->make('auth');
+        $user = $user->user()->town_id;
+
+        $challenges = array();
+
         if (!empty($keyword)) {
-            $inscription = inscription::where('sport', 'LIKE', "%$keyword%")
-				->orWhere('category', 'LIKE', "%$keyword%")
-				->orWhere('proof', 'LIKE', "%$keyword%")
-				->orWhere('inscription', 'LIKE', "%$keyword%")
-				->orWhere('pase_cantonal', 'LIKE', "%$keyword%")
-				->orWhere('edition', 'LIKE', "%$keyword%")
-				->paginate($perPage);
+
+            $people = DB::select('select * from users where active = ?', [$user]);
         } else {
-            $inscription = inscription::paginate($perPage);
+            $people = person::where('town', '=', $user)
+                ->paginate($perPage);
         }
 
-        return view('inscription.inscription.index', compact('inscription'));
+        foreach ($people as $item){
+            $temp = array();
+
+
+
+        }
+
+        return view('inscription.inscription.index', compact('people'));
     }
 
     /**
@@ -145,6 +153,8 @@ class inscriptionController extends Controller
         $person->province = $request->province;
         $person->save();
 
+        $id = person::max('id');
+
 
 
 
@@ -155,6 +165,7 @@ class inscriptionController extends Controller
         $inscription->edition = $request->edition;
         $inscription->stade = 1;
         $inscription->proof = $request->proof;
+        $inscription->person = $id;
 
 
         if (!empty($request->file('pase_cantonal'))){

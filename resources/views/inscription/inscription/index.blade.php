@@ -5,7 +5,7 @@
         <div class="row">
             @include('admin.sidebar')
 
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Inscripción</div>
                     <div class="panel-body">
@@ -30,35 +30,18 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Deporte</th><th>Categoria</th><th>Prueba</th><th>Acciones</th>
+                                        <th>Cedula</th>
+                                        <th>Nombre</th>
+                                        <th>Rama</th>
+                                        <th>Prueba</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($inscription as $item)
-                                    <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->sport }}</td><td>{{ $item->category }}</td><td>{{ $item->proof }}</td>
-                                        <td>
-                                            <a href="{{ url('/inscription/inscription/' . $item->id) }}" title="View inscription"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button></a>
-                                            <a href="{{ url('/inscription/inscription/' . $item->id . '/edit') }}" title="Edit inscription"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button></a>
-                                            {!! Form::open([
-                                                'method'=>'DELETE',
-                                                'url' => ['/inscription/inscription', $item->id],
-                                                'style' => 'display:inline'
-                                            ]) !!}
-                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar', array(
-                                                        'type' => 'submit',
-                                                        'class' => 'btn btn-danger btn-xs',
-                                                        'title' => 'Delete inscription',
-                                                        'onclick'=>'return confirm("Confirm delete?")'
-                                                )) !!}
-                                            {!! Form::close() !!}
-                                        </td>
-                                    </tr>
-                                @endforeach
+
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $inscription->appends(['search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $people->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>
