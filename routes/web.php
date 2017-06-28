@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/json', 'inscription\\inscriptionController@cargarPorCedula');
+
 Route::resource('states/states', 'States\\statesController');
 
 Route::resource('town/town', 'town\\townController');

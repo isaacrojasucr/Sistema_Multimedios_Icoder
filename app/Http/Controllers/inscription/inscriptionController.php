@@ -7,6 +7,7 @@ use App\challenge;
 use App\edition;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\padron;
 use Illuminate\Support\Facades\DB;
 use App\inscription;
 use App\person;
@@ -254,9 +255,9 @@ class inscriptionController extends Controller
         return redirect('inscription/inscription');
     }
 
-    public function cargarPorCedula($idNumber)
+    public function cargarPorCedula()
     {
-        $persona = padron::where('id_card','=',$idNumber)->get();
+        $persona = padron::all();
 
         return response()->json(
             $persona->toArray()
