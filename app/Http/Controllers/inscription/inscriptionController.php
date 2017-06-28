@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Session;
 use Exception;
 
+
 class inscriptionController extends Controller
 {
 
@@ -251,5 +252,14 @@ class inscriptionController extends Controller
         Session::flash('flash_message', 'inscription deleted!');
 
         return redirect('inscription/inscription');
+    }
+
+    public function cargarPorCedula($idNumber)
+    {
+        $persona = padron::where('id_card','=',$idNumber)->get();
+
+        return response()->json(
+            $persona->toArray()
+            );
     }
 }
