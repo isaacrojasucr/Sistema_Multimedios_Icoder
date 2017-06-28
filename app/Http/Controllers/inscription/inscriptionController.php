@@ -31,28 +31,18 @@ class inscriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
 
         $user = app()->make('auth');
         $user = $user->user()->town_id;
 
-        $challenges = array();
-
-        if (!empty($keyword)) {
-
-            $people = \DB::select('select * from users where active = ?', [$user]);
-        } else {
-            $people = person::where('town', '=', $user)
-                ->paginate($perPage);
-        }
-
-        foreach ($people as $item){
-            $temp = array();
-
-
-
-        }
+            $people = \DB::select('select p.id_card as cedula, concat(p.name,\' \',p.lastname) as nombre, p.gender as rama, 
+                                    c.name as prueba, cc.year as categoria, s.name as deporte, i.stade as estado
+                                    from inscriptions as i
+                                    inner join challenges as c on c.id = i.proof
+                                    inner join people as p on p.id = i.person
+                                    inner join sports as s on s.id = i.sport
+                                    inner join categories as cc on cc.id = i.category
+                                    where p.town = ?', [$user]);
 
         return view('inscription.inscription.index', compact('people'));
     }

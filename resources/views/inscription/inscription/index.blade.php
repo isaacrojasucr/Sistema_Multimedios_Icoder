@@ -13,35 +13,44 @@
                             <i class="fa fa-plus" aria-hidden="true"></i> Inscribir nuevo participante
                         </a>
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/inscription/inscription', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Buscar...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        {!! Form::close() !!}
 
                         <br/>
                         <br/>
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <thead>
-                                    <tr>
-                                        <th>Cedula</th>
-                                        <th>Nombre</th>
-                                        <th>Rama</th>
-                                        <th>Prueba</th>
-                                        <th>Acciones</th>
-                                    </tr>
+                                <tr>
+                                    <th>Cedula</th>
+                                    <th>Nombre</th>
+                                    <th>Rama</th>
+                                    <th>Prueba</th>
+                                    <th>Categoria</th>
+                                    <th>Deporte</th>
+                                    <th>Acciones</th>
+                                </tr>
                                 </thead>
                                 <tbody>
 
+                                @foreach($people as $item)
+
+                                    <tr>
+                                        <th>{{$item->cedula}}</th>
+                                        <th>{{$item->nombre}}</th>
+                                        <th>{{$item->rama}}</th>
+                                        <th>{{$item->prueba}}</th>
+                                        <th>{{$item->categoria}}</th>
+                                        <th>{{$item->deporte}}</th>
+                                        <th>
+                                            <a href="#" class="btn btn-xs btn-success">Inscribir</a>
+                                            <a href="#" class="btn btn-xs btn-danger">Desinscribir</a>
+                                            <a href="#" class="btn btn-xs btn-info">Editar</a>
+                                        </th>
+                                    </tr>
+
+                                @endforeach
+
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $people->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>
