@@ -21,6 +21,30 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+
+    <script type="text/javascript">
+        function lee_json() {
+            $.getJSON("/data.json", function (datos) {
+                var data = datos;
+                var id = document.getElementsByName("id_card")[0].value;
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].id_card == id) {
+                        if (data[i].gender === 2) {
+                            alert(data[i].name + " " + data[i].lastname + " Femenino");
+                        } else {
+                            alert(data[i].name + " " + data[i].lastname + " Masculino");
+                        }
+                        break;
+                    }
+                }
+                alert("NO Mames");
+            });
+        }
+    </script>
+
 </head>
 <body>
 <div id="app" >

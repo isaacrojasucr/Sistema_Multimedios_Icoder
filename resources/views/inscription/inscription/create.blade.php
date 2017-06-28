@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+
     <div class="container">
         <div class="row">
             <div class="col-md-1">
@@ -26,7 +29,7 @@
                         @endif
 
                         {!! Form::open(['route' => 'inscription/save', 'method' => 'post', 'files'=>true]) !!}
-                            <ul class="nav nav-tabs" id="tabs" data-tabs="tabs" style="text-align: center">
+                        <ul class="nav nav-tabs" id="tabs" data-tabs="tabs" style="text-align: center">
                             <li class="active"><a href="#personal" data-toggle="tab">Datos Personales</a></li>
                             <li><a href="#atlete" data-toggle="tab">Información de atleta</a></li>
                             <li><a href="#settings" data-toggle="tab">Pruebas</a></li>
@@ -42,12 +45,12 @@
                                             {!! $errors->first('Cédula', '<p class="help-block">:message</p>') !!}
                                         </div>
                                         <div class="col-md-3">
-                                             <div class="form-group" style="text-align: center">
-                                                  <button class="btn btn-primary" onclick="">Buscar</button>
-                                             </div>
-                                        </div> 
-                                    </div>                                    
-                                                                       
+                                            <div class="form-group" style="text-align: center">
+                                                <button type="button" class="btn btn-primary" onclick="lee_json()">Buscar esta cédula</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                                         {!! Form::label('name', 'Nombre', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
@@ -68,7 +71,7 @@
                                             {!! Form::text('lastname', null, ['class' => 'form-control']) !!}
                                             {!! $errors->first('lastname', '<p class="help-block">:message</p>') !!}
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="form-group {{ $errors->has('country') ? 'has-error' : ''}}">
                                         {!! Form::label('country', 'País', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
