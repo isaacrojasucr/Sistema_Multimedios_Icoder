@@ -40,7 +40,7 @@ class inscriptionController extends Controller
 
         if (!empty($keyword)) {
 
-            $people = DB::select('select * from users where active = ?', [$user]);
+            $people = \DB::select('select * from users where active = ?', [$user]);
         } else {
             $people = person::where('town', '=', $user)
                 ->paginate($perPage);
@@ -185,10 +185,10 @@ class inscriptionController extends Controller
 
 
 
-        Session::flash('flash_message', 'inscription added!');
 
         return redirect('inscription/inscription');
     }
+
     /**
      * Display the specified resource.
      *
