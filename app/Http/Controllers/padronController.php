@@ -87,19 +87,19 @@ class padronController extends Controller
 
     public function postImportPadron(Request $request){
 
-
          Excel::load(Input::file('file'),function ($reader)
         {
             $reader->each(function ($sheet){
                 padron::firstOrCreate($sheet->toArray());
             });
-
         });
 
 
 
 
-        return redirect('home');
+
+        return view("padron.msjpadron")->with("msj"," Padron Cargado Correctamente");
+
 
 
     }

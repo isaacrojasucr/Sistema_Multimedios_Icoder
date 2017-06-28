@@ -4,27 +4,23 @@
         <h3 class="box-title">Usuarios Encontrados</h3>
     </div>
 
-    <div class="box-body">
+    <div class="table-responsive ">
         <?php
 
 
         if( count($personas) >0  ){
         ?>
 
-        <table id="tabla_usuarios" class="table-responsive" cellspacing="0" width="100%">
+        <table id="tabla_usuarios" class="table table-borderless" >
 
             <thead>
             <tr>
-
+                <th>Cédula</th>
                 <th>Nombres</th>
-                <th>MN</th>
                 <th>Apellido</th>
-                <th>Genero</th>
-                <th>Id Card</th>
+                <th>Género</th>
                 <th>Email</th>
-                <th> teléfono</th>
-
-
+                <th>Teléfono</th>
                 <th>Acción</th>
             </tr>
             </thead>
@@ -41,12 +37,10 @@
             ?>
 
             <tr role="row" class="odd">
-
+                <td><?= $persona->id_card;  ?></td>
                 <td><?= $persona->name;  ?></td>
-                <td><?= $persona->middlename;  ?></td>
                 <td><?= $persona->lastname;  ?></td>
                 <td><?= $persona->gender;  ?></td>
-                <td><?= $persona->id_card;  ?></td>
                 <td><?= $persona->mail;  ?></td>
                 <td><?= $persona->phone;  ?></td>
 

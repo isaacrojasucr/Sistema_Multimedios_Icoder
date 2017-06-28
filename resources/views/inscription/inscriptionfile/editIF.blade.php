@@ -25,10 +25,7 @@
                         <label for="nombre">Nombres*</label>
                         <input type="text" class="form-control" id="nombre" name="nombres"  value="<?= $usuario->name; ?>"  >
                     </div>
-                    <div class="form-group col-xs-12">
-                        <label for="ciudad">Middlename</label>
-                        <input type="text" class="form-control" id="middlename" name="middlename" value="<?= $usuario->middlename; ?>"  >
-                    </div>
+
                     <div class="form-group col-xs-12">
                         <label for="apellido">Apellido</label>
                         <input type="text" class="form-control" id="apellido" name="apellido" value="<?= $usuario->lastname; ?>" >

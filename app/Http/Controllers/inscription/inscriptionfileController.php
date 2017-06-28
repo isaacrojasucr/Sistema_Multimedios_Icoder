@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\inscription;
 
+use App\padron;
 use App\person;
 
 
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Collection;
 use function MongoDB\BSON\toJSON;
 use phpDocumentor\Reflection\Types\Null_;
+use PhpParser\Node\Stmt\Foreach_;
 use Session;
 use DB;
 use Excel;
@@ -39,9 +41,28 @@ class inscriptionfileController extends Controller
         $id = 1;
         foreach ($results as $p){
 
-            if (!empty($p->name)){
-                $p->id=$id;
+            if (!empty($p->id_card)){
 
+                $perPage = 1;
+                $key=$p->id_card;
+
+                $padron = padron::where('id_card', "$key")
+                    ->paginate($perPage);
+
+                foreach ($padron as $pad){
+                    $p->name= $pad->name;
+                    $p->lastname= $pad->lastname;
+                    $p->gender= $pad->gender;
+
+                }
+
+                if (!empty($p->id_card)) {
+
+
+                    $p->id=$id;
+                } else {
+                    $p->id=$id;
+                }
                 $infor -> push($p);
                 $id+=1;
             }
@@ -56,6 +77,9 @@ class inscriptionfileController extends Controller
 
 
     }
+
+
+
 
 
 
@@ -103,6 +127,14 @@ class inscriptionfileController extends Controller
                 $p=$p;
                 $p->name  =  $data["nombres"];
                 $p->lastname=$data["apellido"];
+                $p->gender  =  $data["genero"];
+                $p->mail=$data["email"];
+                $p->phone=$data["telefono"];
+                $p->height  =  $data["altura"];
+                $p->width=$data["peso"];
+                $p->birthday  =  $data["fechanacimiento"];
+                $p->town=$data["Canton"];
+                $p->province=$data["provincia"];
             }
         }
         $request->session()->forget('persona');
