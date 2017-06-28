@@ -41,7 +41,9 @@
                                         <th>{{$item->categoria}}</th>
                                         <th>{{$item->deporte}}</th>
                                         <th>
-                                            <a href="#" class="btn btn-xs btn-success">Inscribir</a>
+                                            @if($item->ins == 1)
+                                                <a href="#" class="btn btn-xs btn-success">Inscribir</a>
+                                            @endif
                                             <a href="#" class="btn btn-xs btn-danger">Cancelar Proceso</a>
                                             <a href="#" class="btn btn-xs btn-info">Editar</a>
                                         </th>
