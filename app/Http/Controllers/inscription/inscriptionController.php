@@ -287,6 +287,25 @@ class inscriptionController extends Controller
     public function edit($id)
     {
         $inscription = inscription::findOrFail($id);
+        $person = $inscription->person;
+        $person = person::finOrFail($person);
+        $inscription->name = $person->name;
+        $inscription->middlename = $person->middlename;
+        $inscription->lastname = $person->lastname;
+        $inscription->gender = $person->gender;
+        $inscription->id_card = $person->id_card;
+        $inscription->mail = $person->mail;
+        $inscription->phone = $person->phone;
+        $inscription->height = $person->height;
+        $inscription->width = $person->width;
+        $inscription->blood = $person->blood;
+        $inscription->country = $person->country;
+        $inscription->birthday = $person->birthday;
+        $inscription->town = $person->town;
+        $inscription->address = $person->address;
+        $inscription->role = $person->role;
+        $inscription->city = $person->city;
+        $inscription->province = $person->province;
 
         return view('inscription.inscription.edit', compact('inscription'));
     }
@@ -305,6 +324,9 @@ class inscriptionController extends Controller
         $requestData = $request->all();
         
         $inscription = inscription::findOrFail($id);
+        $person = $inscription->person;
+        $person = person::finOrFail($person);
+        
         $inscription->update($requestData);
 
         Session::flash('flash_message', 'inscription updated!');
