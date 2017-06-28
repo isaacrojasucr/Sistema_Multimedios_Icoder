@@ -36,7 +36,8 @@ class inscriptionController extends Controller
         $user = $user->user()->town_id;
 
             $people = \DB::select('select p.id_card as cedula, concat(p.name,\' \',p.lastname) as nombre, p.gender as rama, 
-                                    c.name as prueba, cc.year as categoria, s.name as deporte, i.stade as estado
+                                    c.name as prueba, cc.year as categoria, s.name as deporte, i.stade as estado,
+                                    if(i.inscription = \'\' or p.mail = \'\' or p.phone=\'\' or p.height = \'\' or p.width = \'\' or p.image = \'\' or p.id_card_front = \'\' or p.id_card_back = \'\' or p.city = \'\' or p.province = \'\' or p.address = \'\',0, 1) as ins
                                     from inscriptions as i
                                     inner join challenges as c on c.id = i.proof
                                     inner join people as p on p.id = i.person
