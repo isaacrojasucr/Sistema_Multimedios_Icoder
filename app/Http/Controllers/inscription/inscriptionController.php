@@ -107,18 +107,73 @@ class inscriptionController extends Controller
         $person->lastname = $request->lastname;
         $person->gender = $request->gender;
         $person->id_card = $request->id_card;
-        $person->mail = $request->mail;
-        $person->phone = $request->phone;
-        $person->height = $request->height;
-        $person->width = $request->width;
-        $person->blood = $request->blood;
-        $person->country = $request->country;
-        $person->birthday = $request->birthday;
-        $person->town = $request->town;
-        $person->address = $request->address;
-        $person->role= $request->role;
-
         $id_card = $request->id_card;
+
+        if (!empty($request->mail)){
+            $person->mail = $request->mail;
+        }else{
+            $person->mail =  '';
+        }
+
+        if (!empty($request->phone)){
+            $person->phone = $request->phone;
+        }else{
+            $person->phone =  '';
+        }
+
+        if (!empty($request->width)){
+            $person->width = $request->width;
+        }else{
+            $person->width =  '';
+        }
+
+        if (!empty($request->height)){
+            $person->height = $request->height;
+        }else{
+            $person->height =  '';
+        }
+
+        if (!empty($request->blood)){
+            $person->blood = $request->blood;
+        }else{
+            $person->blood =  '';
+        }
+
+        if (!empty($request->country)){
+            $person->country = $request->country;
+        }else{
+            $person->country =  '';
+        }
+
+        if (!empty($request->birthday)){
+            $person->birthday = $request->birthday;
+        }else{
+            $person->birthday =  '';
+        }
+
+        if (!empty($request->town)){
+            $person->town = $request->town;
+        }else{
+            $person->town =  '';
+        }
+
+        if (!empty($request->town)){
+            $person->town = $request->town;
+        }else{
+            $person->town =  '';
+        }
+
+        if (!empty($request->address)){
+            $person->address = $request->address;
+        }else{
+            $person->address =  '';
+        }
+
+        if (!empty($request->role)){
+            $person->role = $request->role;
+        }else{
+            $person->role =  '';
+        }
 
         if (!empty($request->file('image'))){
             $person->image = $request->file('image')->store(''.$id_card);
@@ -141,18 +196,49 @@ class inscriptionController extends Controller
             $person->id_card_back =  '';
         }
 
-        $person->city = $request->city;
-        $person->province = $request->province;
+        if (!empty($request->city)){
+            $person->city = $request->city;
+        }else{
+            $person->city =  '';
+        }
+
+        if (!empty($request->province)){
+            $person->province = $request->province;
+        }else{
+            $person->province =  '';
+        }
+
         $person->save();
 
         $id = person::max('id');
 
         $inscription = new inscription();
-        $inscription->sport =  $request->sport;
-        $inscription->category = $request->category;
-        $inscription->edition = $request->edition;
+
+        if (!empty($request->sport)){
+            $inscription->sport = $request->sport;
+        }else{
+            $inscription->sport =  '';
+        }
+
+        if (!empty($request->category)){
+            $inscription->category = $request->category;
+        }else{
+            $inscription->category =  '';
+        }
+
+        if (!empty($request->edition)){
+            $inscription->edition = $request->edition;
+        }else{
+            $inscription->edition =  '';
+        }
+
+        if (!empty($request->proof)){
+            $inscription->proof = $request->proof;
+        }else{
+            $inscription->proof =  '';
+        }
+
         $inscription->stade = 1;
-        $inscription->proof = $request->proof;
         $inscription->person = $id;
 
 
