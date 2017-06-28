@@ -23,24 +23,25 @@
     </script>
 
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
-
     <script type="text/javascript">
         function lee_json() {
-            $.getJSON("/data.json", function (datos) {
+            $.getJSON("/js/data.json", function (datos) {
                 var data = datos;
                 var id = document.getElementsByName("id_card")[0].value;
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].id_card == id) {
-                        if (data[i].gender === 2) {
-                            alert(data[i].name + " " + data[i].lastname + " Femenino");
-                        } else {
-                            alert(data[i].name + " " + data[i].lastname + " Masculino");
-                        }
+                            document.getElementsByName("name")[0].value = data[i].name;
+                            document.getElementsByName("middlename")[0].value = "---";
+                            document.getElementsByName("lastname")[0].value = data[i].lastname;
+                            document.getElementsByName("country")[0].value = "Costa Rica";
                         break;
                     }
+
+                    if(i === (data.lenght-1)){
+                        alert("no existen coincidencias");
+                    }
                 }
-                alert("NO Mames");
+
             });
         }
     </script>
