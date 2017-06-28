@@ -147,10 +147,6 @@ class inscriptionController extends Controller
 
         $id = person::max('id');
 
-
-
-
-
         $inscription = new inscription();
         $inscription->sport =  $request->sport;
         $inscription->category = $request->category;

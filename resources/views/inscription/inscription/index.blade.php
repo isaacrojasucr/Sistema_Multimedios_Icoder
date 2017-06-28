@@ -42,7 +42,7 @@
                                         <th>{{$item->deporte}}</th>
                                         <th>
                                             <a href="#" class="btn btn-xs btn-success">Inscribir</a>
-                                            <a href="#" class="btn btn-xs btn-danger">Desinscribir</a>
+                                            <a href="#" class="btn btn-xs btn-danger">Cancelar Proceso</a>
                                             <a href="#" class="btn btn-xs btn-info">Editar</a>
                                         </th>
                                     </tr>
