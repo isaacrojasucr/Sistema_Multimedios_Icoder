@@ -69,9 +69,17 @@ Route::get('inscriptionfile/{id}/destroy',[
 
 ]);
 
+
 Route::post('editar', 'inscription\\inscriptionfileController@editar');
 
 Route::get('guardar', 'inscription\\inscriptionfileController@guardar');
 
 
 
+
+Route::get('/ajax-loadsport',function (){
+    $id_sport =Input::get('id_sport');
+    session('sport2',$id_sport);
+
+
+});

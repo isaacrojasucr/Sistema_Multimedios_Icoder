@@ -12,7 +12,21 @@
                 </div>
                 <div class="form-group col-xs-3">
                     <label for="selecionado">Deporte selecionado:</label>
-                    <input type="text" class="form-control" id="nombre" name="nombres"  value="<?= $sport; ?>"  >
+
+                    {{Form::open(array('url'=>'','files'=>true))}}
+
+                   <div class="form-group">
+                       <label for=""></label>
+                       <select class="form-control input-sm" name="sport" id="sport">
+                           @foreach($sport as $spo)
+                             <option value="{{$spo->id}}">{{$spo->name}}</option>
+                           @endforeach
+                       </select>
+                   </div>
+
+                    {{Form::close()}}
+
+
                 </div>
             </div>
 
@@ -46,6 +60,9 @@
             <h3 class="box-title">Usuarios Encontrados</h3>
         </div>
 
+
+        @if($personas!=null &&(count($personas)>0) )
+            {!! Form::open(['route' => 'inscriptionfile.store', 'method' => 'POST']) !!}
         <table class="table table-striped">
             <thead>
             <th>Cédula</th>
@@ -62,7 +79,7 @@
 
             <tbody>
             <tr>
-                @if($personas!=null)
+
                     @foreach ($personas as $persona)
                         <td>{{$persona->id_card}}</td>
                         <td>{{$persona->name}}</td>
@@ -77,17 +94,34 @@
             </tr>
 
             @endforeach
-            @else
-                <br/><div class='rechazado'><label style='color:#FA206A'>...No se ha encontrado ningun usuario...</label>  </div>
 
-            @endif
+
             </tbody>
         </table>
+            <div class="box-footer " style="text-align: center">
+                {!! Form::submit('Registrar', ['class' =>'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        @else
+            <br/><div class='rechazado'><label style='color:#FA206A'>...No se ha encontrado ningun usuario...</label>  </div>
+
+        @endif
+
+
 
 
 
     </div>
 
+    <script>
+        $('#sport').on('change',function (e) {
+           console.log(e) ;
 
+           var id_sport = e.target.value;
+           $.get('/ajax-loadsport?id_sport='+id_sport,function (data) {
+               
+           })
+        })
+    </script>
 
 @endsection

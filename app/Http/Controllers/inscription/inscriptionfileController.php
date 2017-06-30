@@ -4,8 +4,9 @@ namespace App\Http\Controllers\inscription;
 
 use App\padron;
 use App\person;
-use App\inscription;
-
+use App\sport;
+use App\inscriptionGrupal;
+use App\inscriptionPeople;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -105,8 +106,8 @@ class inscriptionfileController extends Controller
     public function index(Request  $request)
     {
         $personas= null;
-
-        $request-> session()->put('sport', "Futbol");
+        $sport = sport::all();
+        $request-> session()->put('sport', $sport);
         $sport = $request->session()->get('sport');
         $personas = $request->session()->get('persona');
         return view('inscription.inscriptionfile.inscriptionfile')->with("personas", $personas )->with("sport", $sport );
@@ -172,18 +173,27 @@ class inscriptionfileController extends Controller
     public function store(Request $request)
     {
 
-    }
-    public function save(Request $request)
-    {
+        //Crear inscripcion y guardarla
+
+        $inscription = new inscriptionGrupal();
+        $inscription->sport =  5;
+        $inscription->category =  3;
+        $inscription->edition =  2017;
+        $inscription->proof =  10;
+        $inscription->stade = 1;
+        $inscription->inscription = '';
+        $inscription->save();
+
+        $idInscription = inscriptionGrupal::max('id');
 
         $val  = $request->session()->get('persona');
         foreach ( $val as $p){
             $perPage = 1;
-            $key= $p->id_card;
-            $padron = padron::where('id_card', "$key")
-                ->paginate($perPage);
 
-            if (empty($padron)){
+            $key= $p->id_card;
+            $personT = person::where('id_card', 'LIKE', "%$key%")->paginate($perPage);;
+
+            if (!count($personT)>0){
 
                 $person = new person();
                 $person->name = $p->name;
@@ -284,46 +294,34 @@ class inscriptionfileController extends Controller
                 $person->save();
                 $id = person::max('id');
             }else{
-                $id = $p->id_card;
+
+
+                         $id = $p->id;
+
+
             }
 
 
+            //Guardar inscriptionpersona
 
-
-            $inscription = new inscription();
-
-
-
-
-
-
-                $inscription->category =  3;
-
-
-
-                $inscription->edition =  2017;
-
-
-
-                $inscription->proof =  10;
-
-
-            $inscription->stade = 1;
-            $inscription->person = $id;
-            $inscription->sport =  5;
-
-                $inscription->pase_cantonal = '';
-
-
-                $inscription->inscription = '';
-
-            $inscription->save();
+            $inscriptionPeople = new inscriptionPeople();
+            $inscriptionPeople->id_inscription =  $idInscription;
+            $inscriptionPeople->id_person =  $id;
+            $inscriptionPeople->pase_cantonal =  "";
+            $inscriptionPeople->save();
 
 
         }
 
 
         $request->session()->forget('persona');
+
+        Session::flash('message','Creado correctamente');
+        return redirect('inscriptionfile');
+    }
+    public function save(Request $request)
+    {
+
         echo "Se guardo todito";
     }
 
