@@ -83,6 +83,25 @@ function guargarDatos() {
 
 }
 
+$('#sport').on('change',function (e) {
+    console.log(e) ;
+    var _token = $('input[name="_token"]').val();
+    var id_sport = e.target.value;
+    // var newid = $(this).attr('id')
+    $.ajax({
+        method: "POST",
+        url: "/ajaxloadsport/setid/"+id_sport,
+        data: { _token : _token }
+    })
+        .done(function( msg ) {
+            //Done
+        });
+
+    //$.get('/ajax-loadsport?id_sport='+id_sport,function (data) {
+
+    // })
+})
+
 
 
 

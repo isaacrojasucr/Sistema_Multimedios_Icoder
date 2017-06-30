@@ -19,7 +19,7 @@
                        <label for=""></label>
                        <select class="form-control input-sm" name="sport" id="sport">
                            @foreach($sport as $spo)
-                             <option value="{{$spo->id}}">{{$spo->name}}</option>
+                               <option value="{{$spo->id}}" {{($spo->id == $sportid) ? 'selected':''}}>{{$spo->name}}</option>
                            @endforeach
                        </select>
                    </div>

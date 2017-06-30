@@ -76,10 +76,5 @@ Route::get('guardar', 'inscription\\inscriptionfileController@guardar');
 
 
 
+Route::post('ajaxloadsport/setid/{name}', 'inscription\\inscriptionfileController@changeSport');
 
-Route::get('/ajax-loadsport',function (){
-    $id_sport =Input::get('id_sport');
-    session('sport2',$id_sport);
-
-
-});

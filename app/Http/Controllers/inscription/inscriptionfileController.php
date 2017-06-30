@@ -107,10 +107,11 @@ class inscriptionfileController extends Controller
     {
         $personas= null;
         $sport = sport::all();
-        $request-> session()->put('sport', $sport);
-        $sport = $request->session()->get('sport');
+
+        $sportid = $request->session()->get('sportid');
+
         $personas = $request->session()->get('persona');
-        return view('inscription.inscriptionfile.inscriptionfile')->with("personas", $personas )->with("sport", $sport );
+        return view('inscription.inscriptionfile.inscriptionfile')->with("personas", $personas )->with("sport", $sport )->with("sportid", $sportid );
 
     }
 
@@ -174,9 +175,9 @@ class inscriptionfileController extends Controller
     {
 
         //Crear inscripcion y guardarla
-
+        $sportid = $request->session()->get('sportid');
         $inscription = new inscriptionGrupal();
-        $inscription->sport =  5;
+        $inscription->sport =  $sportid;
         $inscription->category =  3;
         $inscription->edition =  2017;
         $inscription->proof =  10;
@@ -477,6 +478,11 @@ class inscriptionfileController extends Controller
     }
 
 
+    public function changeSport(Request $request, $id)
 
+    {
+        $request-> session()->put('sportid', $id);
+
+    }
 
 }
