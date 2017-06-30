@@ -107,9 +107,9 @@
 
                                 <!-- Deportes-->
 
-
                                 <li id="option3"><a href="{{ url('inscriptionfile') }}">Inscripción Excel</a></li>
-                                <li id="option3"><a href="{{ url('padroncargar') }}">Cargar Padron</a></li>
+                                <li id="option4"><a href="{{ url('inscriptiongroup') }}">Inscripción Equipos</a></li>
+                                <li id="option5"><a href="{{ url('padroncargar') }}">Cargar Padron</a></li>
 
 
 

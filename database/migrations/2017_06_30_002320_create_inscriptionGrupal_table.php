@@ -21,10 +21,12 @@ class CreateInscriptionGrupalTable extends Migration
             $table->string('inscription');
             $table->integer('edition');
             $table->integer('stade');
+            $table->integer('town')->unsigned();
             $table->timestamps();
 
             $table->foreign('sport')->references('id')->on('sports')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('category')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('town')->references('id')->on('towns')->onDelete('cascade')->onUpdate('cascade');
             // $table->foreign('proof')->references('id')->on('challenges')->onDelete('cascade')->onUpdate('cascade');
         });
     }

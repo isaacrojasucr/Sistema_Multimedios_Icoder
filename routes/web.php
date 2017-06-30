@@ -78,3 +78,9 @@ Route::get('guardar', 'inscription\\inscriptionfileController@guardar');
 
 Route::post('ajaxloadsport/setid/{name}', 'inscription\\inscriptionfileController@changeSport');
 
+
+
+Route::resource('inscriptiongroup', 'inscription\\inscriptiongroupController');
+
+//inscription group
+

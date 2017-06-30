@@ -176,6 +176,8 @@ class inscriptionfileController extends Controller
 
         //Crear inscripcion y guardarla
         $sportid = $request->session()->get('sportid');
+        $user = app()->make('auth');
+        $userTown =$user->user()->town_id;
         $inscription = new inscriptionGrupal();
         $inscription->sport =  $sportid;
         $inscription->category =  3;
@@ -183,6 +185,7 @@ class inscriptionfileController extends Controller
         $inscription->proof =  10;
         $inscription->stade = 1;
         $inscription->inscription = '';
+        $inscription->town = $userTown;
         $inscription->save();
 
         $idInscription = inscriptionGrupal::max('id');
@@ -296,8 +299,10 @@ class inscriptionfileController extends Controller
                 $id = person::max('id');
             }else{
 
+   foreach ($personT as $pp){
+       $id = $pp->id;
+   }
 
-                         $id = $p->id;
 
 
             }
