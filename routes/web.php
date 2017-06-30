@@ -50,16 +50,28 @@ Route::post('postImportPadron', ['as'=>'postImportPadron', 'uses'=>'padronContro
 Route::resource('inscriptionfile', 'inscription\\inscriptionfileController');
 
 
-Route::get('/getImport', 'inscription\\inscriptionfileController@getImport');
+Route::get('getImport', 'inscription\\inscriptionfileController@getImport');
+
+
+
+
 
 Route::post('postImport', ['as'=>'postImport', 'uses'=>'inscription\\inscriptionfileController@postImport']);
 
 Route::get('inscriptionfile/{id}/edit', 'inscription\\inscriptionfileController@edit' );
-Route::get('inscriptionfile/{id}/delete', 'inscription\\inscriptionfileController@delete' );
+Route::post('inscriptionfile/{id}/update', 'inscription\\inscriptionfileController@update' );
+Route::post('inscriptionfile/{id}/delete2', 'inscription\\inscriptionfileController@delete2' );
 Route::get('/listado', 'inscription\\inscriptionfileController@listado');
+Route::get('inscriptionfile/{id}/destroy',[
+    'uses' =>'inscription\\inscriptionfileController@destroy',
+    'as'   =>'inscriptionfile.destroy'
+
+
+]);
 
 Route::post('editar', 'inscription\\inscriptionfileController@editar');
 
 Route::get('guardar', 'inscription\\inscriptionfileController@guardar');
+
 
 

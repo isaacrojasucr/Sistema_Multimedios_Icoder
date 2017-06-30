@@ -4,7 +4,7 @@ namespace App\Http\Controllers\inscription;
 
 use App\padron;
 use App\person;
-
+use App\inscription;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -52,7 +52,9 @@ class inscriptionfileController extends Controller
                 foreach ($padron as $pad){
                     $p->name= $pad->name;
                     $p->lastname= $pad->lastname;
-                    $p->gender= $pad->gender;
+                    if($pad->gender= 1)
+                    $p->gender= "M";
+                    else{$p->gender= "F";}
 
                 }
 
@@ -102,10 +104,12 @@ class inscriptionfileController extends Controller
      */
     public function index(Request  $request)
     {
-        $personas= new person();
+        $personas= null;
 
-
-        return view('inscription.inscriptionfile.inscriptionfile')->with("personas", $personas );
+        $request-> session()->put('sport', "Futbol");
+        $sport = $request->session()->get('sport');
+        $personas = $request->session()->get('persona');
+        return view('inscription.inscriptionfile.inscriptionfile')->with("personas", $personas )->with("sport", $sport );
 
     }
 
@@ -169,11 +173,173 @@ class inscriptionfileController extends Controller
     {
 
     }
-    public function guardar(Request $request)
+    public function save(Request $request)
     {
+
+        $val  = $request->session()->get('persona');
+        foreach ( $val as $p){
+            $perPage = 1;
+            $key= $p->id_card;
+            $padron = padron::where('id_card', "$key")
+                ->paginate($perPage);
+
+            if (empty($padron)){
+
+                $person = new person();
+                $person->name = $p->name;
+
+                $person->lastname = $p->lastname;
+                $person->gender = $p->gender;
+                $person->id_card = $p->id_card;
+                $id_card = $p->id_card;
+                if (! empty($p->middlename)) {
+                    $person->middlename = $p->middlename;
+                } else {
+                    $person->mail = '';
+                }
+                if (! empty($p->mail)) {
+                    $person->mail = $p->mail;
+                } else {
+                    $person->mail = '';
+                }
+
+                if (! empty($p->phone)) {
+                    $person->phone = $p->phone;
+                } else {
+                    $person->phone = '';
+                }
+
+                if (! empty($p->width)) {
+                    $person->width = $p->width;
+                } else {
+                    $person->width = '';
+                }
+
+                if (! empty($p->height)) {
+                    $person->height = $p->height;
+                } else {
+                    $person->height = '';
+                }
+
+                if (! empty($p->blood)) {
+                    $person->blood = $p->blood;
+                } else {
+                    $person->blood = '';
+                }
+
+                if (! empty($p->country)) {
+                    $person->country = $p->country;
+                } else {
+                    $person->country = '';
+                }
+
+                if (! empty($p->birthday)) {
+                    $person->birthday = $p->birthday;
+                } else {
+                    $person->birthday = '';
+                }
+
+                if (! empty($p->town)) {
+                    $person->town = $p->town;
+                } else {
+                    $person->town = '';
+                }
+
+                if (! empty($p->town)) {
+                    $person->town = $p->town;
+                } else {
+                    $person->town = '';
+                }
+
+                if (! empty($p->address)) {
+                    $person->address = $p->address;
+                } else {
+                    $person->address = '';
+                }
+
+                if (! empty($p->role)) {
+                    $person->role = $p->role;
+                } else {
+                    $person->role = '';
+                }
+
+                $person->image = '';
+
+                $person->id_card_front = '';
+
+                $person->id_card_back = '';
+
+                if (! empty($p->city)) {
+                    $person->city = $p->city;
+                } else {
+                    $person->city = '';
+                }
+
+                if (! empty($p->province)) {
+                    $person->province = $p->province;
+                } else {
+                    $person->province = '';
+                }
+
+                $person->save();
+                $id = person::max('id');
+            }else{
+                $id = $p->id_card;
+            }
+
+
+
+
+            $inscription = new inscription();
+
+
+
+
+
+
+                $inscription->category =  3;
+
+
+
+                $inscription->edition =  2017;
+
+
+
+                $inscription->proof =  10;
+
+
+            $inscription->stade = 1;
+            $inscription->person = $id;
+            $inscription->sport =  5;
+
+                $inscription->pase_cantonal = '';
+
+
+                $inscription->inscription = '';
+
+            $inscription->save();
+
+
+        }
+
+
         $request->session()->forget('persona');
         echo "Se guardo todito";
     }
+
+    public function creation (Request $request,$id,$name)
+    {
+
+        $request-> session()->put('sport', $id);
+
+        $personas= new person();
+
+
+        return view('inscription.inscriptionfile.inscriptionfile')->with("personas", $personas );
+
+    }
+
+
 
     /**
      * Display the specified resource.
@@ -205,7 +371,7 @@ class inscriptionfileController extends Controller
         }
 
        // print dd($usuario);
-      return view('inscription.inscriptionfile.editIF')->with("usuario", $usuario );
+        return view('inscription.inscriptionfile.editIF',compact('usuario'));
 
     }
 
@@ -245,7 +411,42 @@ class inscriptionfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $val  = $request->session()->get('persona');
+        $data=$request->all();
+        $id = $data["id_usuario"];
+        foreach ( $val as $p ){
+
+            if($p->id == $id )
+            {
+                $p=$p;
+                $p->name  =  $data["nombres"];
+                $p->lastname=$data["apellido"];
+                $p->gender  =  $data["genero"];
+                $p->mail=$data["email"];
+                $p->phone=$data["telefono"];
+                $p->height  =  $data["altura"];
+                $p->width=$data["peso"];
+                $p->birthday  =  $data["fechanacimiento"];
+                $p->town=$data["Canton"];
+                $p->province=$data["provincia"];
+            }
+        }
+        $request->session()->forget('persona');
+
+        $request-> session()->put('persona', $val);
+
+        if(true){
+
+            Session::flash('flash_message','Datos actualizados Correctamente');
+            return redirect('inscriptionfile');
+
+        }
+        else
+        {
+            Session::flash('flash_message','hubo un error vuelva a intentarlo');
+            return redirect('inscriptionfile');
+        }
     }
 
     /**
@@ -254,11 +455,28 @@ class inscriptionfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
-    }
+        $val  = $request->session()->get('persona');
+        $usuario = collect();
+        foreach ( $val as $p){
+            if($p->id == $id && !empty($p->name))
+            {
 
+
+            }else {
+                $usuario-> push($p);
+            }
+
+        }
+
+        $request->session()->forget('persona');
+
+        $request-> session()->put('persona', $usuario);
+
+
+        return redirect('inscriptionfile');
+    }
 
 
 

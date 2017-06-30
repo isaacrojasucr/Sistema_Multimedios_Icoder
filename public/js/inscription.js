@@ -46,7 +46,17 @@ function mostrarficha(id_usuario) {
 
 }
 
+function mostrarCargarArchivo() {
 
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+    var url = "getImport";
+
+    $.get(url,function(resul){
+        $("#capa_para_edicion").html(resul);
+    })
+
+}
 
 function eliminarficha(id_usuario) {
 
