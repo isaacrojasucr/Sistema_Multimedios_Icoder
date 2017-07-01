@@ -23,7 +23,6 @@
                                     <th>Cedula</th>
                                     <th>Nombre</th>
                                     <th>Rama</th>
-                                    <th>Prueba</th>
                                     <th>Categoria</th>
                                     <th>Deporte</th>
                                     <th>Acciones</th>
@@ -37,7 +36,6 @@
                                         <th>{{$item->cedula}}</th>
                                         <th>{{$item->nombre}}</th>
                                         <th>{{$item->rama}}</th>
-                                        <th>{{$item->prueba}}</th>
                                         <th>{{$item->categoria}}</th>
                                         <th>{{$item->deporte}}</th>
                                         <th>
@@ -45,7 +43,7 @@
                                                 <a href="#" class="btn btn-xs btn-success">Inscribir</a>
                                             @endif
                                             <a href="#" class="btn btn-xs btn-danger">Cancelar Proceso</a>
-                                            <a href="#" class="btn btn-xs btn-info">Editar</a>
+                                            <a href="{{url('inscription/inscription/'.$item->id.'/edit')}}" class="btn btn-xs btn-info">Editar</a>
                                         </th>
                                     </tr>
 

@@ -35,7 +35,7 @@ class inscriptionController extends Controller
         $user = app()->make('auth');
         $user = $user->user()->town_id;
 
-            $people = \DB::select('select p.id_card as cedula, concat(p.name,\' \',p.lastname) as nombre, p.gender as rama, 
+            $people = \DB::select('select i.id, p.id_card as cedula, concat(p.name,\' \',p.lastname) as nombre, p.gender as rama, 
                                     c.name as prueba, cc.year as categoria, s.name as deporte, i.stade as estado,
                                     if(i.inscription = \'\' or p.mail = \'\' or p.phone=\'\' or p.height = \'\' or p.width = \'\' or p.image = \'\' or p.id_card_front = \'\' or p.id_card_back = \'\' or p.city = \'\' or p.province = \'\' or p.address = \'\',0, 1) as ins
                                     from inscriptions as i
@@ -288,7 +288,7 @@ class inscriptionController extends Controller
     {
         $inscription = inscription::findOrFail($id);
         $person = $inscription->person;
-        $person = person::finOrFail($person);
+        $person = person::findOrFail($person);
         $inscription->name = $person->name;
         $inscription->middlename = $person->middlename;
         $inscription->lastname = $person->lastname;
@@ -307,7 +307,33 @@ class inscriptionController extends Controller
         $inscription->city = $person->city;
         $inscription->province = $person->province;
 
-        return view('inscription.inscription.edit', compact('inscription'));
+        $edition = edition::all();
+
+        $id = $inscription->sport;
+
+        $categories = category::where('sport_id','=',$id)->get();
+
+        $challenges = array();
+        foreach ($categories as $category) {
+            $temp = challenge::where('cat_id','=',$category->id)->get();
+
+            $challenge =  array();
+            foreach ($temp as $i) {
+                $challenge =  array_add($challenge,$i->id . '', $i->name );
+            }
+            $challenges = $challenge;
+
+        }
+
+        $category = array();
+        foreach ($categories as $cat){
+            $category = array_add($category,$cat->id,'Sub.'.$cat->year );
+        }
+
+        
+
+
+        return view('inscription.inscription.edit', compact('inscription', 'id', 'challenges', 'category', 'edition'));
     }
 
     /**
@@ -321,15 +347,120 @@ class inscriptionController extends Controller
     public function update($id, Request $request)
     {
         
-        $requestData = $request->all();
-        
         $inscription = inscription::findOrFail($id);
-        $person = $inscription->person;
-        $person = person::finOrFail($person);
-        
-        $inscription->update($requestData);
 
-        Session::flash('flash_message', 'inscription updated!');
+        $person = $inscription->person;
+
+        $person = person::findOrFail($person);
+
+        $person->name = $request-> name;
+        $person->middlename = $request->middlename;
+        $person->lastname = $request->lastname;
+        $person->gender = $request->gender;
+        $person->id_card = $request->id_card;
+        $id_card = $request->id_card;
+
+        if (!empty($request->mail)){
+            $person->mail = $request->mail;
+        }
+
+        if (!empty($request->phone)){
+            $person->phone = $request->phone;
+        }
+
+        if (!empty($request->width)){
+            $person->width = $request->width;
+        }
+
+        if (!empty($request->height)){
+            $person->height = $request->height;
+        }
+
+        if (!empty($request->blood)){
+            $person->blood = $request->blood;
+        }
+
+        if (!empty($request->country)){
+            $person->country = $request->country;
+        }
+
+        if (!empty($request->birthday)){
+            $person->birthday = $request->birthday;
+        }
+
+        if (!empty($request->town)){
+            $person->town = $request->town;
+        }
+
+        if (!empty($request->town)){
+            $person->town = $request->town;
+        }
+
+        if (!empty($request->address)){
+            $person->address = $request->address;
+        }
+
+        if (!empty($request->role)){
+            $person->role = $request->role;
+        }
+
+        if (!empty($request->file('image'))){
+            $person->image = $request->file('image')->store(''.$id_card);
+        }
+
+        if (!empty($request->file('id_card_front'))){
+
+            $id_f = $request->file('id_card_front')->store($id_card.'');
+            $person->id_card_front = $id_f;
+        }
+
+        if (!empty($request->file('id_card_back'))){
+            $id_b = $request->file('id_card_back')->store($id_card.'');
+            $person->id_card_back = $id_b;
+        }
+
+        if (!empty($request->city)){
+            $person->city = $request->city;
+        }
+        if (!empty($request->province)){
+            $person->province = $request->province;
+        }
+
+        $person->update();
+
+
+
+        if (!empty($request->sport)){
+            $inscription->sport = $request->sport;
+        }
+
+        if (!empty($request->category)){
+            $inscription->category = $request->category;
+        }
+
+        if (!empty($request->edition)){
+            $inscription->edition = $request->edition;
+        }
+
+        if (!empty($request->proof)){
+            $inscription->proof = $request->proof;
+        }
+
+        $inscription->stade = 1;
+        $inscription->person = $id;
+
+
+        if (!empty($request->file('pase_cantonal'))){
+            $inscription->pase_cantonal = $request->file('pase_cantonal')->store($id_card.'');
+        }
+
+        if (!empty($request->file('inscription'))){
+            $inscription->inscription = $request->file('inscription')->store($id_card.'');
+        }
+
+        $inscription->update();
+
+
 
         return redirect('inscription/inscription');
     }
