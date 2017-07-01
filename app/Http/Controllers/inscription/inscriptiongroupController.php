@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\inscription;
 
+use App\inscription;
+use App\town;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\inscriptionPeople;
 use App\inscriptionGrupal;
 use App\person;
+use App\sport;
 class inscriptiongroupController extends Controller
 {
     /**
@@ -53,20 +56,11 @@ class inscriptiongroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
+        $sport = sport::all();
         $inscription = inscriptionGrupal::findOrFail($id);
+        $town = town::findOrFail($inscription->town);
         $idIns = $inscription->id;
         $inscriptionPeople= inscriptionPeople::where('id_inscription','=',$idIns)->get();
         $personas = collect();
@@ -76,9 +70,33 @@ class inscriptiongroupController extends Controller
             $personas -> push($persona);
 
         }
+        $request-> session()->put('inscriptionpeopleGrupal', $inscriptionPeople);
+        $request-> session()->put('personaIGrupal', $personas);
+        $request-> session()->put('inscriptionGrupal', $inscription);
 
 
-        return view('inscription.inscriptiongroup.edit')->with("inscription",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas );
+        return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town);
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit( $id)
+    {
+
+
+        $usuario = person::findOrFail($id);
+
+
+
+        // print dd($usuario);
+        return view('inscription.inscriptiongroup.edit',compact('usuario'));
+
+
     }
 
     /**
@@ -90,7 +108,29 @@ class inscriptiongroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+
+        //Cargar retorno
+        $sport = sport::all();
+        $inscription=  $request-> session()->get('inscriptionGrupal');
+
+        $town = town::findOrFail($inscription->town);
+        $idIns = $inscription->id;
+        $inscriptionPeople= inscriptionPeople::where('id_inscription','=',$idIns)->get();
+        $personas = collect();
+        foreach ($inscriptionPeople as $ip){
+            $id = $ip->id_person;
+            $persona = person::findOrFail($id);
+            $personas -> push($persona);
+
+        }
+        $request-> session()->put('inscriptionpeopleGrupal', $inscriptionPeople);
+        $request-> session()->put('personaIGrupal', $personas);
+        $request-> session()->put('inscriptionGrupal', $inscription);
+
+        return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town);
+
     }
 
     /**
@@ -99,12 +139,84 @@ class inscriptiongroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+
+
+
+
+        
+        //Cargar retorno
+        $sport = sport::all();
+        $inscription=  $request-> session()->get('inscriptionGrupal');
+
+        $town = town::findOrFail($inscription->town);
+        $idIns = $inscription->id;
+        $inscriptionPeople= inscriptionPeople::where('id_inscription','=',$idIns)->get();
+        $personas = collect();
+        foreach ($inscriptionPeople as $ip){
+            $id = $ip->id_person;
+            $persona = person::findOrFail($id);
+            $personas -> push($persona);
+
+        }
+        $request-> session()->put('inscriptionpeopleGrupal', $inscriptionPeople);
+        $request-> session()->put('personaIGrupal', $personas);
+        $request-> session()->put('inscriptionGrupal', $inscription);
+
+        return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town);
+
+
     }
     public function town($id)
     {
         //
+    }
+
+    public function destroygroup(Request $request, $id)
+    {
+        $val  = $request->session()->get('persona');
+        $usuario = collect();
+        foreach ( $val as $p){
+            if($p->id == $id && !empty($p->name))
+            {
+
+
+            }else {
+                $usuario-> push($p);
+            }
+
+        }
+
+        $request->session()->forget('persona');
+
+        $request-> session()->put('persona', $usuario);
+
+
+        return redirect('inscriptionfile');
+    }
+
+    public function editagroup(Request $request, $id)
+    {
+
+
+        $usuario = person::findOrFail($id);
+
+
+
+        // print dd($usuario);
+        return view('inscription.inscriptiongroup.edit',compact('usuario'));
+
+    }
+
+    public function changeSport(Request $request, $id)
+
+    {
+
+        $inscriptiont=  $request-> session()->get('inscriptionGrupal');
+        $inscription = inscriptionGrupal::findOrFail($inscriptiont->id);
+        $inscription->sport=$id;
+        $inscription->update();
+
     }
 }

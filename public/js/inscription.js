@@ -46,6 +46,18 @@ function mostrarficha(id_usuario) {
 
 }
 
+function mostrarfichagrupal(id_usuario) {
+
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+    var url = "inscriptiongroup/"+id_usuario+"/edit";
+
+    $.get(url,function(resul){
+        $("#capa_para_edicion").html(resul);
+    })
+
+}
+
 function mostrarCargarArchivo() {
 
     $("#capa_modal").show();
@@ -62,6 +74,18 @@ function eliminarficha(id_usuario) {
 
 
     var url = "inscriptionfile/"+id_usuario+"/delete";
+
+    $.get(url,function(resul){
+
+        $("#contenido_principal").html(resul);
+    })
+
+
+}
+function eliminarfichagrupo(id_usuario) {
+
+
+    var url = "inscriptiongroup/"+id_usuario+"/deletegroup";
 
     $.get(url,function(resul){
 
@@ -91,6 +115,25 @@ $('#sport').on('change',function (e) {
     $.ajax({
         method: "POST",
         url: "/ajaxloadsport/setid/"+id_sport,
+        data: { _token : _token }
+    })
+        .done(function( msg ) {
+            //Done
+        });
+
+    //$.get('/ajax-loadsport?id_sport='+id_sport,function (data) {
+
+    // })
+})
+
+$('#sportg').on('change',function (e) {
+    console.log(e) ;
+    var _token = $('input[name="_token"]').val();
+    var id_sport = e.target.value;
+    // var newid = $(this).attr('id')
+    $.ajax({
+        method: "POST",
+        url: "/ajaxloadsportgrup/setid/"+id_sport,
         data: { _token : _token }
     })
         .done(function( msg ) {

@@ -87,8 +87,8 @@
                         <td>{{$persona->gender}}</td>
                         <td>{{$persona->mail}}</td>
                         <td>{{$persona->phone}}</td>
-                        <td><a class="btn btn-success" href="{{route('inscriptionfile.edit', $persona->id)}}" role="button"><i class="fa fa-pencil-square-o"></i>Editar</a>
-                            <a class="btn btn-danger" href="{{route('inscriptionfile.destroy', $persona->id)}}" onclick="return confirm('Quiere borrar el registro?')" role="button"><i class="fa fa-trash-o"></i>Eliminar</a>
+                        <td><a class="btn btn-xs btn-info" href="{{route('inscriptionfile.edit', $persona->id)}}" role="button"><i class="fa fa-pencil-square-o"></i>Editar</a>
+                            <a class="btn btn-xs btn-danger" href="{{route('inscriptionfile.destroy', $persona->id)}}" onclick="return confirm('Quiere borrar el registro?')" role="button"><i class="fa fa-trash-o"></i>Eliminar</a>
                         </td>
 
             </tr>

@@ -79,8 +79,18 @@ Route::get('guardar', 'inscription\\inscriptionfileController@guardar');
 Route::post('ajaxloadsport/setid/{name}', 'inscription\\inscriptionfileController@changeSport');
 
 
-
-Route::resource('inscriptiongroup', 'inscription\\inscriptiongroupController');
-
 //inscription group
+Route::resource('inscriptiongroup', 'inscription\\inscriptiongroupController');
+Route::post('inscriptiongroup/{id}/update', 'inscription\\inscriptiongroupController@update' );
+Route::get('inscriptiongroup/{id}/destroy',[
+    'uses' =>'inscription\\inscriptiongroupController@destroy',
+    'as'   =>'inscriptiongroup.destroy'
 
+
+]);
+Route::post('ajaxloadsportgrup/setid/{name}', 'inscription\\inscriptiongroupController@changeSport');
+
+
+
+Route::post('inscriptiongroup/{id}/deletegroup', 'inscription\\inscriptionfileController@deletegroup' );
+Route::post('inscriptiongroup/{id}/edit33', 'inscription\\inscriptionfileController@editagroup' );

@@ -50,7 +50,7 @@
                                                 <a href="#" class="btn btn-xs btn-success">Inscribir</a>
                                             @endif
                                             <a href="#" class="btn btn-xs btn-danger">Cancelar Proceso</a>
-                                            <a href="{{ route('inscriptiongroup.edit', $item->id)}}" class="btn btn-xs btn-info">Editar</a>
+                                            <a href="{{ route('inscriptiongroup.show', $item->id)}}" class="btn btn-xs btn-info">Editar</a>
                                         </th>
                                     </tr>
 
