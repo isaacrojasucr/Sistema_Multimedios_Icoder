@@ -43,7 +43,7 @@ class inscriptionController extends Controller
                                     inner join people as p on p.id = i.person
                                     inner join sports as s on s.id = i.sport
                                     inner join categories as cc on cc.id = i.category
-                                    where p.town = ?', [$user]);
+                                    where p.town = ? order by i.stade asc', [$user]);
 
         return view('inscription.inscription.index', compact('people'));
     }
@@ -259,7 +259,6 @@ class inscriptionController extends Controller
 
 
 
-
         return redirect('inscription/inscription');
     }
 
@@ -352,7 +351,7 @@ class inscriptionController extends Controller
         $person = $inscription->person;
 
         $person = person::findOrFail($person);
-
+        
         $person->name = $request-> name;
         $person->middlename = $request->middlename;
         $person->lastname = $request->lastname;
@@ -425,7 +424,7 @@ class inscriptionController extends Controller
         if (!empty($request->province)){
             $person->province = $request->province;
         }
-
+        
         $person->update();
 
 
@@ -447,7 +446,7 @@ class inscriptionController extends Controller
         }
 
         $inscription->stade = 1;
-        $inscription->person = $id;
+        
 
 
         if (!empty($request->file('pase_cantonal'))){
@@ -489,4 +488,21 @@ class inscriptionController extends Controller
             $persona->toArray()
             );
     }
+
+    public function inscribir($id)
+    {
+        $inscription = inscription::findOrFail($id);
+        $inscription->stade = 2;
+        $inscription->update();
+        return redirect('inscription/inscription');
+    }
+
+    public function cancelarProceso($id)
+    {
+        $inscription = inscription::findOrFail($id);
+        $inscription->stade = 3;
+        $inscription->update();
+        return redirect('inscription/inscription');
+    }   
+
 }

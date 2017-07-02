@@ -31,21 +31,33 @@
                                 <tbody>
 
                                 @foreach($people as $item)
+                                    @if($item->estado == 1 or $item->estado == 2) 
 
-                                    <tr>
+                                        <tr>
                                         <th>{{$item->cedula}}</th>
                                         <th>{{$item->nombre}}</th>
                                         <th>{{$item->rama}}</th>
                                         <th>{{$item->categoria}}</th>
                                         <th>{{$item->deporte}}</th>
+                                        @if($item->estado == 1)
                                         <th>
                                             @if($item->ins == 1)
-                                                <a href="#" class="btn btn-xs btn-success">Inscribir</a>
+                                                <a href="{{url('/inscription/inscribir/'.$item->id)}}" class="btn btn-xs btn-success">Inscribir</a>
                                             @endif
-                                            <a href="#" class="btn btn-xs btn-danger">Cancelar Proceso</a>
-                                            <a href="{{url('inscription/inscription/'.$item->id.'/edit')}}" class="btn btn-xs btn-info">Editar</a>
+                                            <a href="{{url('/inscription/cancelarProceso/'.$item->id)}}" class="btn btn-xs btn-danger">Cancelar Proceso</a>
+                                            <a href="{{url('/inscription/inscription/'.$item->id.'/edit')}}" class="btn btn-xs btn-info">Editar</a>
                                         </th>
+                                        @else
+                                            <th>
+                                                Proceso de inscripción terminado.
+                                            </th>
+                                        @endif
+                                        
+                                        
                                     </tr>
+
+                                    
+                                    @endif
 
                                 @endforeach
 
