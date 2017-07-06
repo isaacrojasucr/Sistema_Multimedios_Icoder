@@ -21,6 +21,11 @@
                     </div>
             </div>
         </div>
+
+
+        <a href="{{ url('/inscriptiongroup/create') }}" class="btn btn-success btn-sm" title="Add New inscription">
+            <i class="fa fa-plus" aria-hidden="true"></i> Inscribir nuevo participante
+        </a>
             <div class="row">
                 <div class="box-header">
                     <h3 class="box-title"> Lista de participantes</h3>
@@ -86,9 +91,7 @@
                     </table>
 
 
-                    <div class="box-footer " style="text-align: center">
-                        <button  onclick="guargarDatos()" class="btn btn-primary">Guardar Datos</button>
-                    </div>
+
                     <?php
 
 

@@ -86,6 +86,11 @@ Route::post('inscriptiongroup/{id}/deletegroup', 'inscription\\inscriptionfileCo
 
 Route::post('inscriptiongroup/{id}/edit33', 'inscription\\inscriptionfileController@editagroup' );
 
+
+
+Route::get('buscarcedula/cedula/{name}', 'inscription\\inscriptiongroupController@buscarcedula');
+
+
 Route::get('inscription/inscribir/{id}',['as'=>'inscription/inscribir', 'uses'=>'inscription\\inscriptionController@inscribir'] );
 
 Route::get('inscription/cancelarProceso/{id}',['as'=>'inscription/cancelarProceso', 'uses'=>'inscription\\inscriptionController@cancelarProceso']);

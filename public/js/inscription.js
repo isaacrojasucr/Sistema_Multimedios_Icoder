@@ -145,6 +145,41 @@ $('#sportg').on('change',function (e) {
     // })
 })
 
+$('#cedulaff').on('input',function (e) {
+    console.log(e) ;
+    var _token = $('input[name="_token"]').val();
+    var cedula = '107090872';
+    // var newid = $(this).attr('id')
+    $.ajax({
+        method: "POST",
+        url: "/buscarcedula/setid/"+cedula,
+        data: { _token : _token }
+    })
+        .done(function( data ) {
+            console.log(data)
+        });
+
+    //$.get('/ajax-loadsport?id_sport='+id_sport,function (data) {
+
+    // })
+})
+
+$('#cedula').on('input',function (e) {
+
+    console.log(e) ;
+    var _token = $('input[name="_token"]').val();
+    var cedula = e.target.value;
+
+    // var newid = $(this).attr('id')
+    $.get('/buscarcedula/cedula/'+cedula,function (data) {
+       $.each(JSON.parse(data),function (index, persona) {
+
+           console.log(persona.id) ;
+    });
+
+
+    });
+});
 
 
 
