@@ -43,11 +43,11 @@ class inscriptiongroupController extends Controller
     public function create(Request $request)
     {
         $usuario = new person();
-
+        $towns = town::all();
         $inscriptionGrupal= $request-> session()->get('inscriptionGrupal');
 
         // print dd($usuario);
-        return view('inscription.inscriptiongroup.create',compact('usuario'))->with('inscription',$inscriptionGrupal);
+        return view('inscription.inscriptiongroup.create',compact('usuario'))->with('inscription',$inscriptionGrupal)->with('towns',$towns);
     }
 
     /**
@@ -58,77 +58,86 @@ class inscriptiongroupController extends Controller
      */
     public function store(Request $request)
     {
-
+        $data=$request->all();
         $inscriptionPeople= $request-> session()->get('inscriptionpeopleGrupal');
 
         $inscriptiongrupal=  $request-> session()->get('inscriptionGrupal');
         $perPage = 1;
-            $id_card = $request->id_card;
+            $id_card = $data["cedula"];
         $personT = person::where('id_card', 'LIKE', "%$id_card%")->paginate($perPage);;
 
         if (!count($personT)>0) {
 
             $person =  new person();
-            $person->name = $request-> name;
-            $person->middlename = $request->middlename;
-            $person->lastname = $request->lastname;
-            $person->gender = $request->gender;
-            $person->id_card = $request->id_card;
-            $id_card = $request->id_card;
+            $person->name = $data["nombres"];
+            $person->middlename = "";
+            $person->lastname = $data["apellido"];
 
-            if (!empty($request->mail)){
-                $person->mail = $request->mail;
+            if ($data["genero"]==1)
+            {
+                $person->gender = 'M';
+            }else{
+                $person->gender = 'F';
+            }
+
+            $person->id_card = $data["cedula"];
+            $id_card = $data["cedula"];
+
+            if (!empty($data["email"])){
+                $person->mail = $data["email"];
             }else{
                 $person->mail =  '';
             }
 
-            if (!empty($request->phone)){
-                $person->phone = $request->phone;
+            if (!empty($data["telefono"])){
+                $person->phone = $data["telefono"];
             }else{
                 $person->phone =  '';
             }
 
-            if (!empty($request->width)){
-                $person->width = $request->width;
+            if (!empty($data["peso"])){
+                $person->width = $data["peso"];
             }else{
                 $person->width =  '';
             }
 
-            if (!empty($request->height)){
-                $person->height = $request->height;
+            if (!empty($data["altura"])){
+                $person->height = $data["altura"];
             }else{
                 $person->height =  '';
             }
 
-            if (!empty($request->blood)){
-                $person->blood = $request->blood;
+            if (!empty($data["blood"])){
+                $person->blood = $data["blood"];
             }else{
                 $person->blood =  '';
             }
 
-            if (!empty($request->country)){
-                $person->country = $request->country;
+            if (!empty($data["ciudad"])){
+                $person->country = $data["ciudad"];
             }else{
                 $person->country =  '';
             }
-
-            if (!empty($request->birthday)){
-                $person->birthday = $request->birthday;
+            if (!empty($data["ciudad"])){
+                $person->province = $data["ciudad"];
+            }else{
+                $person->province =  '';
+            }
+            if (!empty($data["birthday"])){
+                $person->birthday = $data["birthday"];
             }else{
                 $person->birthday =  '';
             }
+            $user = app()->make('auth');
+            $userTown =$user->user()->town_id;
 
-            if (!empty($request->town)){
-                $person->town = $request->town;
+            if (!empty($userTown)){
+                $person->town = $userTown;
             }else{
                 $person->town =  '';
             }
 
-            if (!empty($request->town)){
-                $person->town = $request->town;
-            }else{
-                $person->town =  '';
-            }
+            $person->city =  '';
 
             if (!empty($request->address)){
                 $person->address = $request->address;
@@ -136,11 +145,9 @@ class inscriptiongroupController extends Controller
                 $person->address =  '';
             }
 
-            if (!empty($request->role)){
-                $person->role = $request->role;
-            }else{
-                $person->role =  '';
-            }
+
+                $person->role =  1;
+
 
             if (!empty($request->file('image'))){
                 $person->image = $request->file('image')->store(''.$id_card);
@@ -163,28 +170,24 @@ class inscriptiongroupController extends Controller
                 $person->id_card_back =  '';
             }
 
-            if (!empty($request->city)){
-                $person->city = $request->city;
-            }else{
-                $person->city =  '';
-            }
 
-            if (!empty($request->province)){
-                $person->province = $request->province;
-            }else{
-                $person->province =  '';
-            }
+
+
 
             $id_persona = $person->id_card;
             $person->save();
+            $id_persona=person::max('id');
 
-
+        }else{
+            foreach ( $personT as $p) {
+                $id_persona = $p->id;
+            }
         }
-        $id_persona = $person->id_card;
+
 
         $inscriptionPeople = new inscriptionPeople();
         $inscriptionPeople->id_inscription =  $inscriptiongrupal->id;
-        $inscriptionPeople->id_person =  $id_card;
+        $inscriptionPeople->id_person =  $id_persona;
 
         if (!empty($request->file('id_card_back'))){
             $id_b = $request->file('id_card_back')->store($id_card.'');
