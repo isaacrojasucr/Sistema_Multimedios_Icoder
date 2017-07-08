@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\inscription;
 
+use App\edition;
+use App\Http\Controllers\town\townController;
 use App\inscription;
 use App\padron;
 use App\town;
@@ -25,15 +27,19 @@ class inscriptiongroupController extends Controller
      */
     public function index()
     {
-
-
         $user = app()->make('auth');
         $userTown = $user->user()->town_id;
+
+        $user = app()->make('auth');
+        $user = $user->user()->town_id;
+
+
 
         $inscriptiongrupal = inscriptionGrupal::where('town','=',$userTown)->get();
 
         return view('inscription.inscriptiongroup.index', compact('inscriptiongrupal'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -49,6 +55,45 @@ class inscriptiongroupController extends Controller
         // print dd($usuario);
         return view('inscription.inscriptiongroup.create',compact('usuario'))->with('inscription',$inscriptionGrupal)->with('towns',$towns);
     }
+
+    public function createinscription(Request $request)
+    {
+
+        $towns = town::all();
+       $id=edition::max('id');
+        $edition = edition::findOrFail($id);;
+        $sport = sport::all();
+
+        $user = app()->make('auth');
+        $userTown =$user->user()->town_id;
+        $town= town::findorFail($userTown);
+        $inscriptionGrupal = new inscriptionGrupal();
+        $inscriptionGrupal->sport= 5;
+        $inscriptionGrupal->category=3;
+        $inscriptionGrupal->proof=10;
+        $inscriptionGrupal->inscription="";
+        $inscriptionGrupal->edition=$edition->year;
+        $inscriptionGrupal->stade=0;
+        $inscriptionGrupal->town=$userTown;
+        $inscriptionGrupal->save();
+
+        $idIns = $inscriptionGrupal::max('id');
+        $inscriptionPeople= inscriptionPeople::where('id_inscription','=',$idIns)->get();
+        $personas = collect();
+        foreach ($inscriptionPeople as $ip){
+            $id = $ip->id_person;
+            $persona = person::findOrFail($id);
+            $personas -> push($persona);
+
+        }
+
+
+
+
+        // print dd($usuario);
+        return view('inscription.inscriptiongroup.createinscription',compact('personas'))->with('inscriptiongrupal',$inscriptionGrupal)->with('town',$town)->with('edition',$edition)->with('sport',$sport);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -469,27 +514,11 @@ class inscriptiongroupController extends Controller
         //
     }
 
-    public function destroygroup(Request $request, $id)
+    public function deletegroup(Request $request, $id)
     {
-        $val  = $request->session()->get('persona');
-        $usuario = collect();
-        foreach ( $val as $p){
-            if($p->id == $id && !empty($p->name))
-            {
 
-
-            }else {
-                $usuario-> push($p);
-            }
-
-        }
-
-        $request->session()->forget('persona');
-
-        $request-> session()->put('persona', $usuario);
-
-
-        return redirect('inscriptionfile');
+        
+        return redirect('inscriptiongroup');
     }
 
     public function editagroup(Request $request, $id)

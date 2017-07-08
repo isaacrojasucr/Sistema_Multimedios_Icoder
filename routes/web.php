@@ -80,9 +80,13 @@ Route::get('inscriptiongroup/{id}/destroy',[
     'as'   =>'inscriptiongroup.destroy'
 ]);
 
+Route::get('createinscription', 'inscription\\inscriptiongroupController@createinscription');
+
+
 Route::post('ajaxloadsportgrup/setid/{name}', 'inscription\\inscriptiongroupController@changeSport');
 
-Route::post('inscriptiongroup/{id}/deletegroup', 'inscription\\inscriptionfileController@deletegroup' );
+Route::get('inscriptiongroup/deletegroup/{id}',['as'=>'inscriptiongroup/deletegroup', 'uses'=>'inscription\\inscriptiongroupController@deletegroup']);
+
 
 Route::post('inscriptiongroup/{id}/edit33', 'inscription\\inscriptionfileController@editagroup' );
 
@@ -94,4 +98,8 @@ Route::get('buscarcedula/cedula/{name}', 'inscription\\inscriptiongroupControlle
 Route::get('inscription/inscribir/{id}',['as'=>'inscription/inscribir', 'uses'=>'inscription\\inscriptionController@inscribir'] );
 
 Route::get('inscription/cancelarProceso/{id}',['as'=>'inscription/cancelarProceso', 'uses'=>'inscription\\inscriptionController@cancelarProceso']);
+
+
+
+
 

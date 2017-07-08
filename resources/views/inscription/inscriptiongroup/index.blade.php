@@ -9,7 +9,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Inscripciónes realizadas</div>
                     <div class="panel-body">
-                        <a href="{{ url('/home') }}" class="btn btn-success btn-sm" title="Add New inscription">
+                        <a href="{{ url('/createinscription')}}" class="btn btn-success btn-sm" title="Add New inscription">
                             <i class="fa fa-plus" aria-hidden="true"></i> Inscribir nuevo equipo
                         </a>
 
@@ -38,7 +38,7 @@
                                         <th>{{$item->town}}</th>
                                         <th>{{$item->category}}</th>
                                         <th>
-                                            @if($item->stade == 1)
+                                            @if($item->stade == 0)
                                                 <a >En Proceso</a>
                                                 @else
                                                 <a >Finalizada</a>
@@ -49,7 +49,7 @@
                                             @if($item->stade == 1)
                                                 <a href="#" class="btn btn-xs btn-success">Inscribir</a>
                                             @endif
-                                            <a href="#" class="btn btn-xs btn-danger">Cancelar Proceso</a>
+                                            <a href="{{ url('inscriptiongroup/deletegroup/'.$item->id)}}" class="btn btn-xs btn-danger">Cancelar Proceso</a>
                                             <a href="{{ route('inscriptiongroup.show', $item->id)}}" class="btn btn-xs btn-info">Editar</a>
                                         </th>
                                     </tr>
