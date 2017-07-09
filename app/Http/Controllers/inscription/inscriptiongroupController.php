@@ -516,13 +516,30 @@ class inscriptiongroupController extends Controller
 
     public function deletegroup(Request $request, $id)
     {
+        $inscriptiogroup = inscriptionGrupal::where('id','=',$id)->get();
+        $id="";
+        foreach ($inscriptiogroup as $ig){
 
-        
+            $id= $ig->id;
+            inscriptionGrupal::destroy($id);
+        }
+
+        $inscriptionPeople= inscriptionPeople::where('id_inscription','=',$id)->get();
+
+        foreach ($inscriptionPeople as $ip){
+
+            $id= $ip->id;
+            inscriptionPeople::destroy($id);
+        }
+
+
         return redirect('inscriptiongroup');
     }
 
     public function editagroup(Request $request, $id)
     {
+
+
 
 
         $usuario = person::findOrFail($id);
