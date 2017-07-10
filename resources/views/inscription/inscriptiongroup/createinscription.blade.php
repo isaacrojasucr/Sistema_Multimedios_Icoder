@@ -23,7 +23,7 @@
         </div>
 
 
-        <a href="{{ url('/inscriptiongroup/create') }}" class="btn btn-success btn-sm" title="Add New inscription">
+        <a href="{{ route('inscriptiongroup.create') }}" class="btn btn-success btn-sm" title="Add New inscription">
             <i class="fa fa-plus" aria-hidden="true"></i> Inscribir nuevo participante
         </a>
         <div class="row">
