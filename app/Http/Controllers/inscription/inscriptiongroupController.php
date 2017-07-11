@@ -678,8 +678,11 @@ class inscriptiongroupController extends Controller
 
             if ($state)
             {
+                $persona= new person();
+                $persona->name = "";
                 $col= new Collection();
-                $col->push("Existe");
+                $col->push($persona);
+               
                 return $col->toJson();
             }else  {
 
