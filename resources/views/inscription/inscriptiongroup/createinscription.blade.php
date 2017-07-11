@@ -5,10 +5,18 @@
         <div class="row">
             @include('admin.sidebar')
 
+            @if(Session::has('message'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{Session::get('message')}}
+                </div>
+
+
+            @endif
             <div class="box box-primary">
                 <h3 class="box-title">Inscripción: {{$inscriptiongrupal->id}}</h3>
                 <div class="form-group col-xs-3">
-                    <div><label for="">Edición: {{$inscriptiongrupal->edition}} </label></div>
+                    <div><label for="">Edición: {{$edition->year}} </label></div>
                     <div><label for="">Ciudad: {{$town->name}}</label></div>
                     <div class="form-group">
                         <label for="">Deporte: </label>

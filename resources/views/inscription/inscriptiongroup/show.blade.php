@@ -8,7 +8,7 @@
             <div class="box box-primary">
                 <h3 class="box-title">Inscripción: {{$inscriptiongrupal->id}}</h3>
                 <div class="form-group col-xs-3">
-                <div><label for="">Edición: {{$inscriptiongrupal->edition}} </label></div>
+                <div><label for="">Edición: {{$edition->year}} </label></div>
                 <div><label for="">Ciudad: {{$town->name}}</label></div>
                 <div class="form-group">
                     <label for="">Deporte: </label>
@@ -26,7 +26,10 @@
         <a href="{{ route('inscriptiongroup.create') }}" class="btn btn-success btn-sm" title="Add New inscription">
             <i class="fa fa-plus" aria-hidden="true"></i> Inscribir nuevo participante
         </a>
-            <div class="row">
+
+        <a href="{{ url('inscriptiongroup/getPDF/'.$inscriptiongrupal->id)}}"   class="btn btn-sm btn-success">Generar PDF</a>
+
+        <div class="row">
                 <div class="box-header">
                     <h3 class="box-title"> Lista de participantes</h3>
                 </div>
@@ -67,7 +70,11 @@
                             <td><?= $persona->id_card;  ?></td>
                             <td><?= $persona->name;  ?></td>
                             <td><?= $persona->lastname;  ?></td>
-                            <td><?= $persona->gender;  ?></td>
+                            @if($persona->gender==1or$persona->gender=="M")
+                                <td><?= "   M"  ?></td>
+                            @else
+                                <td><?= "   F"  ?></td>
+                            @endif
                             <td><?= $persona->mail;  ?></td>
                             <td><?= $persona->phone;  ?></td>
 

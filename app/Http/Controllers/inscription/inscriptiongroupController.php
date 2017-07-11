@@ -7,13 +7,16 @@ use App\Http\Controllers\town\townController;
 use App\inscription;
 use App\padron;
 use App\town;
+
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\inscriptionPeople;
 use App\inscriptionGrupal;
 use App\person;
+use PDF;
 use App\sport;
+use App\state;
 use Illuminate\Http\Response;
 use Session;
 ;
@@ -36,6 +39,9 @@ class inscriptiongroupController extends Controller
 
 
         $inscriptiongrupal = inscriptionGrupal::where('town','=',$userTown)->get();
+
+
+
 
         return view('inscription.inscriptiongroup.index', compact('inscriptiongrupal'));
     }
@@ -72,7 +78,7 @@ class inscriptiongroupController extends Controller
         $inscriptionGrupal->category=3;
         $inscriptionGrupal->proof=10;
         $inscriptionGrupal->inscription="";
-        $inscriptionGrupal->edition=$edition->year;
+        $inscriptionGrupal->edition=$edition->id;
         $inscriptionGrupal->stade=0;
         $inscriptionGrupal->town=$userTown;
         $inscriptionGrupal->save();
@@ -181,8 +187,27 @@ class inscriptiongroupController extends Controller
             }else{
                 $person->town =  '';
             }
+            if (!empty(!empty($data["pais"]))){
+                $person->country = !empty($data["pais"]);
+            }else{
+                $person->country =  '';
+            }
 
-            $person->city =  '';
+            $town= town::findOrFail($userTown);;
+             $idstate = $town->state_id;
+
+
+
+
+
+            $city= state::where('id','=',$idstate)->get();
+
+            foreach ($city as $c){
+                $person->province =  $c->id;
+            }
+
+
+
 
             if (!empty($request->address)){
                 $person->address = $request->address;
@@ -234,8 +259,8 @@ class inscriptiongroupController extends Controller
         $inscriptionPeople->id_inscription =  $inscriptiongrupal->id;
         $inscriptionPeople->id_person =  $id_persona;
 
-        if (!empty($request->file('id_card_back'))){
-            $id_b = $request->file('id_card_back')->store($id_card.'');
+        if (!empty($request->file('id_pase_cantonal'))){
+            $id_b = $request->file('id_pase_cantonal')->store($id_card.'');
             $inscriptionPeople->pase_cantonal = $id_b;
         }else{
             $inscriptionPeople->pase_cantonal =  '';
@@ -268,11 +293,43 @@ class inscriptiongroupController extends Controller
         $request-> session()->put('personaIGrupal', $personas);
         $request-> session()->put('inscriptionGrupal', $inscription);
 
+
+        //change stade inscriptiongroup
+
+        $stade = false;
+        $inscriptionPeople= inscriptionPeople::where('id_inscription','=',$id)->get();
+        $p = collect();
+        foreach ($inscriptionPeople as $ip)
+        {
+            $id = $ip->id_person;
+            $p = person::findOrFail($id);
+            if(!($p->name=="" or $p->lastname=="" or $p->gender=="" or $p->id_card=="" or $p->mail=="" or $p->phone=="" or $p->height=="" or $p->width== "" or $p->blood=="" or $p->country=="" or $p->town==""  or $p->image=="" or $p->id_card_front=="" or $p->id_card_back=="" or $ip->pase_cantonal=="" ))
+            {
+                $stade=true;
+            }else{
+                $stade=false;
+            }
+
+        }
+        if ($stade)
+        {
+            $inscription->stade=1;
+            $inscription->update();
+        }
+
+
+
+
+
+
         Session::flash('flash_message', 'Participante actualizado correctamente!');
 
         return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town);
 
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -282,6 +339,8 @@ class inscriptiongroupController extends Controller
      */
     public function show(Request $request, $id)
     {
+        $idedition=edition::max('id');
+        $edition = edition::findOrFail($idedition);;
         $sport = sport::all();
         $inscription = inscriptionGrupal::findOrFail($id);
         $town = town::findOrFail($inscription->town);
@@ -299,7 +358,7 @@ class inscriptiongroupController extends Controller
         $request-> session()->put('inscriptionGrupal', $inscription);
 
 
-        return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town);
+        return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town)->with('edition',$edition);
 
     }
 
@@ -372,8 +431,11 @@ class inscriptiongroupController extends Controller
             $person->blood =  '';
         }
 
-        if (!empty($data["Canton"])){
-            $person->town = $data["Canton"];
+        $user = app()->make('auth');
+        $userTown =$user->user()->town_id;
+
+        if (!empty($userTown)){
+            $person->town = $userTown;
         }else{
             $person->town =  '';
         }
@@ -384,11 +446,13 @@ class inscriptiongroupController extends Controller
             $person->birthday =  '';
         }
 
-        if (!empty($data["provincia"])){
-            $person->province = $data["provincia"];
-        }else{
-            $person->province =  '';
-        }
+        $town= town::findOrFail($userTown);;
+
+        $city= state::findOrFail($town->state_id);;
+
+        $person->province =  $city->id;
+
+
 
         if (!empty($data["pais"])){
             $person->city = $data["pais"];
@@ -437,6 +501,30 @@ class inscriptiongroupController extends Controller
         }
 
 
+
+
+        //change stade inscriptiongroup
+       $inscriptiogroup =   $request-> session()->get('inscriptionGrupal');
+        $stade = false;
+        $inscriptionPeople= inscriptionPeople::where('id_inscription','=',$inscriptiogroup->id)->get();
+        $p = collect();
+        foreach ($inscriptionPeople as $ip)
+        {
+            $id = $ip->id_person;
+            $p = person::findOrFail($id);
+            if(!($p->name=="" or $p->lastname=="" or $p->gender=="" or $p->id_card=="" or $p->mail=="" or $p->phone=="" or $p->height=="" or $p->width== "" or $p->blood==""  or $p->town==""  or $p->image=="" or $p->id_card_front=="" or $p->id_card_back=="" or $ip->pase_cantonal=="" ))
+            {
+                $stade=true;
+            }else{
+                $stade=false;
+            }
+
+        }
+        if ($stade)
+        {
+            $inscriptiogroup->stade=1;
+            $inscriptiogroup->update();
+        }
 
 
 
@@ -566,19 +654,92 @@ class inscriptiongroupController extends Controller
 
     {
 
-       $persona= new person();
+            $state = false;
+            $edition = edition::max('id');
 
 
-        $padron= padron::where('id_card','=',$id)->get();
-         $col = new Collection();
-        foreach ($padron as $p){
+            $ins= inscriptionGrupal::where('edition','=',$edition)->get();
 
-            $col->push($p);
+            foreach ($ins as $i)
+            {
+                $personab = person::where('id_card','=',$id)->get();
+
+                foreach ($personab as $p) {
+
+                    $idcard = $p->id;
+                }
+
+                $inscriptionpeople= inscriptionPeople::where('id_person','=',$idcard)->where('id_inscription','=',$i->id)-> get();
+
+                foreach ($inscriptionpeople as $insp) {
+                    $state=true;
+                }
+            }
+
+            if ($state)
+            {
+                $col= new Collection();
+                $col->push("Existe");
+                return $col->toJson();
+            }else  {
+
+                $persona= new person();
+
+
+                $padron= padron::where('id_card','=',$id)->get();
+                $col = new Collection();
+                foreach ($padron as $p){
+
+                    $col->push($p);
+
+                }
+
+
+
+
+
+                return $col->toJson();
+            }
+
+
+
+
+
+
+    }
+
+    public function inscribir($id)
+    {
+        $inscription = inscriptionGrupal::findOrFail($id);
+        $inscription->stade = 2;
+        $inscription->update();
+        return redirect('inscriptiongroup');
+    }
+
+    public function getPDF($id)
+    {
+
+        $idedition=edition::max('id');
+        $edition = edition::findOrFail($idedition);;
+        $sport = sport::all();
+        $inscription = inscriptionGrupal::findOrFail($id);
+        $town = town::findOrFail($inscription->town);
+        $idIns = $inscription->id;
+        $inscriptionPeople= inscriptionPeople::where('id_inscription','=',$idIns)->get();
+        $personas = collect();
+        foreach ($inscriptionPeople as $ip){
+            $id = $ip->id_person;
+            $persona = person::findOrFail($id);
+            $personas -> push($persona);
 
         }
 
 
-        return $col->toJson();
+
+        $pdf=PDF::loadView('inscription.inscriptiongroup.pdf',['inscriptiongrupal'=>$inscription,'inscriptionPeople'=>$inscriptionPeople,'personas'=>$personas,'sport'=>$sport,'town'=>$town,'edition'=>$edition,]);
+
+       return  $pdf->stream('inscription.pdf');
+
 
     }
 }

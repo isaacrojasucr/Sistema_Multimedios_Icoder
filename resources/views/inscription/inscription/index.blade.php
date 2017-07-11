@@ -4,7 +4,14 @@
     <div class="container">
         <div class="row">
             @include('admin.sidebar')
+            @if(Session::has('message'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{Session::get('message')}}
+                </div>
 
+
+            @endif
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Inscripciónes realizadas</div>

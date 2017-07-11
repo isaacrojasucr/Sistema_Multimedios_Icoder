@@ -51,18 +51,42 @@
 
 
                                     <div class="form-group col-xs-12">
-                                        <label for="institucion">Genero</label>
-                                        <input type="text" class="form-control" id="genero" name="genero"  value="<?= $usuario->gender; ?>" >
+                                        <label for="ocupacion">Genero</label>
+                                        <select class="form-control" name="genero" id="genero">
+                                            <option value="1" >Masculino</option>
+                                            <option value="2" >Femenino</option>
+                                        </select>
                                     </div>
                                     <div class="form-group col-xs-12">
                                         <label for="email">Email*</label>
                                         <input type="text" class="form-control" id="email" name="email"   value="<?= $usuario->mail; ?>" >
                                     </div>
+
+
+
+
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-4">
+                                <div class="box-body ">
                                     <div class="form-group col-xs-12">
                                         <label for="ocupacion">Teléfono</label>
                                         <input type="text" class="form-control" id="telefono" name="telefono" value="<?= $usuario->phone; ?>" >
                                     </div>
+                                    <div class="form-group col-xs-12">
+                                        <label for="nombre">País*</label>
+                                        <input type="text" class="form-control" id="pais" name="pais"  value="<?= $usuario->city; ?>"  >
+                                    </div>
 
+                                    <div class="form-group col-xs-12">
+                                        <label for="institucion">Fecha de nacimiento</label>
+                                        <input type="text" class="form-control" id="fechanacimiento" name="fechanacimiento"  value="<?= $usuario->birthday; ?>" >
+                                    </div>
 
 
 
@@ -83,33 +107,7 @@
                                     </div>
                                     <div class="form-group col-xs-12">
                                         <label for="ocupacion">Tipo de sangre</label>
-                                        <input type="text" class="form-control" id="blood" name="blood" value="<?= $usuario->blood; ?>" >
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-4">
-                                <div class="box-body ">
-                                    <div class="form-group col-xs-12">
-                                        <label for="nombre">País*</label>
-                                        <input type="text" class="form-control" id="pais" name="pais"  value="<?= $usuario->country; ?>"  >
-                                    </div>
-
-                                    <div class="form-group col-xs-12">
-                                        <label for="institucion">Fecha de nacimiento</label>
-                                        <input type="text" class="form-control" id="fechanacimiento" name="fechanacimiento"  value="<?= $usuario->birthday; ?>" >
-                                    </div>
-                                    <div class="form-group col-xs-12">
-                                        <label for="ocupacion">Canton</label>
-                                        <input type="text" class="form-control" id="Canton" name="Canton" value="<?= $usuario->town; ?>" >
-                                    </div>
-                                    <div class="form-group col-xs-12">
-                                        <label for="email">Provincia*</label>
-                                        <input type="text" class="form-control" id="provincia" name="provincia"   value="<?= $usuario->province; ?>" >
+                                        {!! Form::select('blood',['1'=>'A+', '2'=>'A-', '3'=>'B+', '4'=>'B-', '5'=>'AB+', '6'=>'AB-', '7'=>'O+','8'=>'O-'] , null, ['class'=>'form-control']) !!}
                                     </div>
 
 

@@ -4,7 +4,14 @@
     <div class="container">
         <div class="row">
             @include('admin.sidebar')
+            @if(Session::has('message'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{Session::get('message')}}
+                </div>
 
+
+            @endif
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Inscripciónes realizadas</div>
@@ -22,7 +29,6 @@
                                 <tr>
                                     <th>Número </th>
                                     <th>Edición</th>
-                                    <th>Ciudad</th>
                                     <th>Categoria</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
@@ -35,21 +41,31 @@
                                     <tr>
                                         <th>{{$item->id}}</th>
                                         <th>{{$item->edition}}</th>
-                                        <th>{{$item->town}}</th>
                                         <th>{{$item->category}}</th>
                                         <th>
                                             @if($item->stade == 0)
                                                 <a >En Proceso</a>
-                                                @else
+                                                @elseif($item->stade == 1)
+                                                <a >Completa</a>
+                                                @elseif($item->stade == 2)
                                                 <a >Finalizada</a>
                                             @endif
 
                                         </th>
                                         <th>
                                             @if($item->stade == 1)
-                                                <a href="#" class="btn btn-xs btn-success">Inscribir</a>
+                                                <a href="{{ url('inscriptiongroup/inscribir/'.$item->id)}}"   class="btn btn-xs btn-success">Inscribir</a>
+
+                                                @else
+                                                <a href="#" disabled="true"  class="btn btn-xs btn-default">Inscribir</a>
                                             @endif
-                                            <a href="{{ url('inscriptiongroup/deletegroup/'.$item->id)}}" class="btn btn-xs btn-danger">Cancelar Proceso</a>
+                                                @if($item->stade == 1 or$item->stade == 0)
+                                                    <a href="{{ url('inscriptiongroup/deletegroup/'.$item->id)}}" class="btn btn-xs btn-danger">Cancelar Proceso</a>
+
+                                                @else
+                                                    <a href="{{ url('inscriptiongroup/deletegroup/'.$item->id)}}" disabled="true" class="btn btn-xs btn-danger">Cancelar Proceso</a>
+                                                @endif
+
                                             <a href="{{ route('inscriptiongroup.show', $item->id)}}" class="btn btn-xs btn-info">Editar</a>
                                         </th>
                                     </tr>

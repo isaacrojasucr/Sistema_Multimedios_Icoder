@@ -18,7 +18,14 @@
 
         @endif
 
+            @if(Session::has('message'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{Session::get('message')}}
+                </div>
 
+
+            @endif
         <div class="row">
 
             <div class="col-md-12">
@@ -77,7 +84,7 @@
                                 <div class="box-body ">
 
                                     <div class="form-group col-xs-12">
-                                        <label for="email">Email*</label>
+                                        <label for="email">Email</label>
                                         <input type="text" class="form-control" id="email" name="email" required  value="<?= $usuario->mail; ?>" >
                                     </div>
                                     <div class="form-group col-xs-12">
@@ -88,7 +95,7 @@
 
 
                                     <div class="form-group col-xs-12">
-                                        <label for="nombre">País*</label>
+                                        <label for="nombre">País</label>
                                         <input type="text" class="form-control" id="pais" name="pais"  value="<?= $usuario->country; ?>"  >
                                     </div>
 
@@ -140,7 +147,7 @@
                                 <div class="box-body " >
 
                                     <div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
-                                        {!! Form::label('Foto', 'Foto', ['class' => 'col-md-4 control-label']) !!}
+                                        {!! Form::label('image', 'Foto', ['class' => 'col-md-4 control-label']) !!}
                                         <div class="col-md-6">
                                             {!! Form::file('image', ['class' => 'form-control border-input']) !!}
                                         </div>

@@ -87,9 +87,9 @@ Route::post('ajaxloadsportgrup/setid/{name}', 'inscription\\inscriptiongroupCont
 
 Route::get('inscriptiongroup/deletegroup/{id}',['as'=>'inscriptiongroup/deletegroup', 'uses'=>'inscription\\inscriptiongroupController@deletegroup']);
 
-
+Route::get('inscriptiongroup/inscribir/{id}',['as'=>'inscriptiongroup/inscribir', 'uses'=>'inscription\\inscriptiongroupController@inscribir']);
 Route::post('inscriptiongroup/{id}/edit33', 'inscription\\inscriptionfileController@editagroup' );
-
+Route::get('inscriptiongroup/getPDF/{id}',['as'=>'inscriptiongroup/getPDF', 'uses'=>'inscription\\inscriptiongroupController@getPDF']);
 
 
 Route::get('buscarcedula/cedula/{name}', 'inscription\\inscriptiongroupController@buscarcedula');

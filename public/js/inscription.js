@@ -156,7 +156,9 @@ $('#buscarcedula').on('click',function (e) {
     $.get('/buscarcedula/cedula/'+cedula,function (data) {
         console.log(JSON.parse(data)) ;
        $.each(JSON.parse(data),function (index, persona) {
-
+       if (persona=="Existe"){
+           $('#nombre').val(persona) ;
+       }
           $('#nombre').val(persona.name) ;
            $('#apellido').val(persona.lastname) ;
            $('#genero').val(persona.gender).selected;
