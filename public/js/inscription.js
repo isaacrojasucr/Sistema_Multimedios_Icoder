@@ -149,6 +149,7 @@ $('#sportg').on('change',function (e) {
 
 $('#buscarcedula').on('click',function (e) {
 
+    $("#mjcreate").hide();
     console.log(e) ;
     var cedula = $('#cedula').val();
 

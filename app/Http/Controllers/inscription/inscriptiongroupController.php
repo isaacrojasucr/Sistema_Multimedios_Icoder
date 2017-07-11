@@ -187,10 +187,10 @@ class inscriptiongroupController extends Controller
             }else{
                 $person->town =  '';
             }
-            if (!empty(!empty($data["pais"]))){
-                $person->country = !empty($data["pais"]);
+            if (!empty($data["pais"])){
+                $person->city = $data["pais"];
             }else{
-                $person->country =  '';
+                $person->city =  '';
             }
 
             $town= town::findOrFail($userTown);;
@@ -295,15 +295,16 @@ class inscriptiongroupController extends Controller
 
 
         //change stade inscriptiongroup
-
+        $idedition=edition::max('id');
+        $edition = edition::findOrFail($idedition);;
         $stade = false;
         $inscriptionPeople= inscriptionPeople::where('id_inscription','=',$id)->get();
-        $p = collect();
+
         foreach ($inscriptionPeople as $ip)
         {
             $id = $ip->id_person;
             $p = person::findOrFail($id);
-            if(!($p->name=="" or $p->lastname=="" or $p->gender=="" or $p->id_card=="" or $p->mail=="" or $p->phone=="" or $p->height=="" or $p->width== "" or $p->blood=="" or $p->country=="" or $p->town==""  or $p->image=="" or $p->id_card_front=="" or $p->id_card_back=="" or $ip->pase_cantonal=="" ))
+            if(!($p->name=="" or $p->lastname=="" or $p->gender=="" or $p->id_card=="" or $p->mail=="" or $p->phone=="" or $p->height=="" or $p->width== "" or $p->blood==""  or $p->town==""  or $p->image=="" or $p->id_card_front=="" or $p->id_card_back=="" or $ip->pase_cantonal=="" ))
             {
                 $stade=true;
             }else{
@@ -324,7 +325,7 @@ class inscriptiongroupController extends Controller
 
         Session::flash('flash_message', 'Participante actualizado correctamente!');
 
-        return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town);
+        return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town)->with('edition',$edition);
 
     }
 
@@ -531,6 +532,8 @@ class inscriptiongroupController extends Controller
 
 
         //Cargar retorno
+        $idedition=edition::max('id');
+        $edition = edition::findOrFail($idedition);
         $sport = sport::all();
         $inscription=  $request-> session()->get('inscriptionGrupal');
 
@@ -550,7 +553,7 @@ class inscriptiongroupController extends Controller
 
         Session::flash('flash_message', 'Participante actualizado correctamente!');
 
-        return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town);
+        return view('inscription.inscriptiongroup.show')->with("inscriptiongrupal",  $inscription )->with("inscriptionPeople",  $inscriptionPeople )->with("personas",  $personas )->with("sport", $sport)->with("town", $town)->with('edition',$edition);
 
     }
 
@@ -575,6 +578,8 @@ class inscriptiongroupController extends Controller
 
 
         //Cargar retorno
+        $idedition=edition::max('id');
+        $edition = edition::findOrFail($idedition);
         $sport = sport::all();
         $inscription=  $request-> session()->get('inscriptionGrupal');
 
@@ -657,7 +662,7 @@ class inscriptiongroupController extends Controller
             $state = false;
             $edition = edition::max('id');
 
-
+        $idcard=0;
             $ins= inscriptionGrupal::where('edition','=',$edition)->get();
 
             foreach ($ins as $i)
